@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-09-29T13:46:05.510Z</updated>
+  <updated>2020-09-30T13:42:37.670Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -18,22 +18,45 @@
   
   <entry>
     <title></title>
-    <link href="http://example.com/2020/09/29/sort/"/>
-    <id>http://example.com/2020/09/29/sort/</id>
-    <published>2020-09-29T12:56:36.664Z</published>
-    <updated>2020-09-29T13:46:05.510Z</updated>
+    <link href="http://example.com/2020/09/30/sort/"/>
+    <id>http://example.com/2020/09/30/sort/</id>
+    <published>2020-09-30T06:53:31.212Z</published>
+    <updated>2020-09-30T13:42:37.670Z</updated>
     
-    <content type="html"><![CDATA[<hr><p>title: sort<br>date: 2020-09-29 20:56:36<br>tags: Python;sort<br>        排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知，Python作为一门赖皮语言，内置不少函数，sort作为其中一门，也发挥着他的作用。下面我们来看一看他的实现过程。</p><pre><code>list1 = [1,5,3,4,2]list1.sort()print(list1)</code></pre><p>一行代码即可实现，下次我们讲讲Python实现三大low排序方法之一：冒泡排序。</p>]]></content>
+    <content type="html"><![CDATA[<hr><p>title: Sort<br>date: 2020-09-30 14:53:31<br>tags: Python<br>排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知，Python作为一门赖皮语言，内置不少函数，sort作为其中一门，也发挥着他的作用。下面我们来看一看他的实现过程。<br>由此可见，很简单</p>]]></content>
     
     
       
       
     <summary type="html">&lt;hr&gt;
-&lt;p&gt;title: sort&lt;br&gt;date: 2020-09-29 20:56:36&lt;br&gt;tags: Python;sort&lt;br&gt;        排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知</summary>
+&lt;p&gt;title: Sort&lt;br&gt;date: 2020-09-30 14:53:31&lt;br&gt;tags: Python&lt;br&gt;排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知，Python作为一门赖皮</summary>
       
     
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>Test_1</title>
+    <link href="http://example.com/2020/09/30/test2/"/>
+    <id>http://example.com/2020/09/30/test2/</id>
+    <published>2020-09-30T06:50:26.000Z</published>
+    <updated>2020-09-30T13:43:47.988Z</updated>
+    
+    <content type="html"><![CDATA[<p>I am your father</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;I am your father&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="Python" scheme="http://example.com/tags/Python/"/>
     
   </entry>
   

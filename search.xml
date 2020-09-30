@@ -2,13 +2,18 @@
 <search>
   <entry>
     <title></title>
-    <url>/2020/09/29/sort/</url>
+    <url>/2020/09/30/sort/</url>
     <content><![CDATA[<hr>
-<p>title: sort<br>date: 2020-09-29 20:56:36<br>tags: Python;sort<br>        排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知，Python作为一门赖皮语言，内置不少函数，sort作为其中一门，也发挥着他的作用。下面我们来看一看他的实现过程。</p>
-<pre><code>list1 = [1,5,3,4,2]
-list1.sort()
-print(list1)</code></pre>
-<p>一行代码即可实现，下次我们讲讲Python实现三大low排序方法之一：冒泡排序。</p>
+<p>title: Sort<br>date: 2020-09-30 14:53:31<br>tags: Python<br>排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知，Python作为一门赖皮语言，内置不少函数，sort作为其中一门，也发挥着他的作用。下面我们来看一看他的实现过程。<br>由此可见，很简单</p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Test_1</title>
+    <url>/2020/09/30/test2/</url>
+    <content><![CDATA[<p>I am your father</p>
+]]></content>
+      <tags>
+        <tag>Python</tag>
+      </tags>
   </entry>
 </search>
