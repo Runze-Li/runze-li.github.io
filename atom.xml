@@ -3,11 +3,11 @@
   <title>RunzeLi&#39;s Blog</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://runze-li.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2020-09-30T13:42:37.670Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://runze-li.github.io/"/>
+  <updated>2020-10-01T12:59:53.084Z</updated>
+  <id>https://runze-li.github.io/</id>
   
   <author>
     <name>RunzeLi</name>
@@ -17,30 +17,24 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2020/09/30/sort/"/>
-    <id>http://example.com/2020/09/30/sort/</id>
-    <published>2020-09-30T06:53:31.212Z</published>
-    <updated>2020-09-30T13:42:37.670Z</updated>
-    
-    <content type="html"><![CDATA[<hr><p>title: Sort<br>date: 2020-09-30 14:53:31<br>tags: Python<br>排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知，Python作为一门赖皮语言，内置不少函数，sort作为其中一门，也发挥着他的作用。下面我们来看一看他的实现过程。<br>由此可见，很简单</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;hr&gt;
-&lt;p&gt;title: Sort&lt;br&gt;date: 2020-09-30 14:53:31&lt;br&gt;tags: Python&lt;br&gt;排序作为计算机算法的重要模块，已经发展出相当多的实现方式，而今天我们要讲的是Python的内置函数，sort，众所周知，Python作为一门赖皮</summary>
-      
+    <title>Sort</title>
+    <link href="https://runze-li.github.io/2020/10/01/test3/"/>
+    <id>https://runze-li.github.io/2020/10/01/test3/</id>
+    <published>2020-10-01T12:58:25.000Z</published>
+    <updated>2020-10-01T12:59:53.084Z</updated>
     
     
     
+    
+    
+    <category term="Python sort函数作为内置函数，有着它自己的魅力" scheme="https://runze-li.github.io/tags/Python-sort%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0%EF%BC%8C%E6%9C%89%E7%9D%80%E5%AE%83%E8%87%AA%E5%B7%B1%E7%9A%84%E9%AD%85%E5%8A%9B/"/>
     
   </entry>
   
   <entry>
     <title>Test_1</title>
-    <link href="http://example.com/2020/09/30/test2/"/>
-    <id>http://example.com/2020/09/30/test2/</id>
+    <link href="https://runze-li.github.io/2020/09/30/test2/"/>
+    <id>https://runze-li.github.io/2020/09/30/test2/</id>
     <published>2020-09-30T06:50:26.000Z</published>
     <updated>2020-09-30T13:43:47.988Z</updated>
     
@@ -56,7 +50,7 @@
     
     
     
-    <category term="Python" scheme="http://example.com/tags/Python/"/>
+    <category term="Python" scheme="https://runze-li.github.io/tags/Python/"/>
     
   </entry>
   
