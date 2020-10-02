@@ -17,21 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Sort | Hexo</title>
-  <meta name="description" content="Sort 是Python的内置函数，是最简单的排序方式。代码如下：   list1 &#x3D; [1,3,4,2,5]  list1.sort()  print(list1)">
+  <title>Binary_Search | Hexo</title>
+  <meta name="description" content="计算机算法中有两个大类：搜索、排序。在学习查找算法时，我们首先学习的就是二分搜索，下面就是我对二分搜索的一些理解：二分搜索作为一个基础查找算法，适用于列表中查找数据，其时间复杂度为O(log2n)，但是，该方法有着一个弊端就是需要列表内的数据是按顺序由小到大进行排列的，因此，可参照我的其他文章了解排序算法。二分搜索的原理很简单，对一个有序序列进行搜索，在搜索过程中，先确定左右指针（left，rig">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sort">
-<meta property="og:url" content="https://runze-li.github.io/2020/10/01/test3/index.html">
+<meta property="og:title" content="Binary_Search">
+<meta property="og:url" content="https://runze-li.github.io/2020/10/02/Binary-Search/index.html">
 <meta property="og:site_name" content="RunzeLi&#39;s Blog">
-<meta property="og:description" content="Sort 是Python的内置函数，是最简单的排序方式。代码如下：   list1 &#x3D; [1,3,4,2,5]  list1.sort()  print(list1)">
+<meta property="og:description" content="计算机算法中有两个大类：搜索、排序。在学习查找算法时，我们首先学习的就是二分搜索，下面就是我对二分搜索的一些理解：二分搜索作为一个基础查找算法，适用于列表中查找数据，其时间复杂度为O(log2n)，但是，该方法有着一个弊端就是需要列表内的数据是按顺序由小到大进行排列的，因此，可参照我的其他文章了解排序算法。二分搜索的原理很简单，对一个有序序列进行搜索，在搜索过程中，先确定左右指针（left，rig">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-01T12:58:25.000Z">
-<meta property="article:modified_time" content="2020-10-02T07:26:04.919Z">
+<meta property="article:published_time" content="2020-10-02T08:11:53.000Z">
+<meta property="article:modified_time" content="2020-10-02T08:46:21.087Z">
 <meta property="article:author" content="RunzeLi">
 <meta property="article:tag" content="Python">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="搜索">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://runze-li.github.io/2020/10/01/test3/index.html">
+  <link rel="canonical" href="https://runze-li.github.io/2020/10/02/Binary-Search/index.html">
   
     <link rel="alternate" href="/atom.xml" title="RunzeLi&#39;s Blog" type="application/atom+xml">
   
@@ -168,7 +170,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -178,7 +180,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/Python/" style="font-size: 13px;">Python</a>
+      <a href="/tags/Python/" style="font-size: 13px;">Python</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 13px;">搜索</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 13px;">算法</a>
     </div>
   </div>
 
@@ -187,7 +189,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -206,25 +208,10 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2020/10/01/test3/" class="title">Sort</a>
+                <a href="/2020/10/02/Binary-Search/" class="title">Binary_Search</a>
               </p>
               <p class="item-date">
-                <time datetime="2020-10-01T12:58:25.000Z" itemprop="datePublished">2020-10-01</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                
-              </p>
-              <p class="item-title">
-                <a href="/2020/09/30/test2/" class="title">Test_1</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2020-09-30T06:50:26.000Z" itemprop="datePublished">2020-09-30</time>
+                <time datetime="2020-10-02T08:11:53.000Z" itemprop="datePublished">2020-10-02</time>
               </p>
             </div>
           </li>
@@ -242,14 +229,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-test3" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Binary-Search" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Sort
+      Binary_Search
     </h1>
   
 
@@ -257,30 +244,46 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/10/01/test3/" class="article-date">
-	  <time datetime="2020-10-01T12:58:25.000Z" itemprop="datePublished">2020-10-01</time>
+	<a href="/2020/10/02/Binary-Search/" class="article-date">
+	  <time datetime="2020-10-02T08:11:53.000Z" itemprop="datePublished">2020-10-02</time>
 	</a>
 </span>
         
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a>, <a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/01/test3/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/02/Binary-Search/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <ul>
-<li><p>Sort 是Python的内置函数，是最简单的排序方式。代码如下：</p>
-<p>  list1 = [1,3,4,2,5]<br>  list1.sort()<br>  print(list1)</p>
-</li>
+        <p>计算机算法中有两个大类：搜索、排序。在学习查找算法时，我们首先学习的就是二分搜索，下面就是我对二分搜索的一些理解：<br>二分搜索作为一个基础查找算法，适用于列表中查找数据，其时间复杂度为O(log2n)，但是，该方法有着一个弊端就是需要列表内的数据是按顺序由小到大进行排列的，因此，可参照我的其他文章了解排序算法。<br>二分搜索的原理很简单，对一个有序序列进行搜索，在搜索过程中，先确定左右指针（left，right）每次取中间数（mid）的值与目标值（value）进行比较，若mid值大于目标值（value），则将右指针（right）放与mid指针左边即mid - 1处，反之，若mid值小于目标值（value），则将左指针（left）放与mid指针右边即mid + 1处。最终，若判定到mid指针处的值为目标值（value），则返回此时mid指针位置。</p>
+<p>代码如下：</p>
+<pre><code>def binary_search(Inp_list,val):  #定义二分搜索函数，两个参数为待搜索列表和目标值
+   left = 0  #左指针初始位置为0
+   right = len(Inp_list) - 1  #右指针初始位置为最右侧数位置
+   while right &gt;= left:  
+        mid = (left + right) // 2  #mid指针位置为left与right中间值
+        if Inp_list[mid] == val:  
+            return mid  
+        else:  
+            if Inp_list[mid] &gt; val:  
+                right = mid - 1  
+            else:  
+                left = mid + 1</code></pre>
+<p>在创建列表时，Python不像C语言那样创建数组，Python中的数组是以列表形式呈现，若手动输入数字需使用Python的列表生成式，代码如下。</p>
+<pre><code>list1 = [int(n) for n in input().split()]</code></pre>
+<p>最后可进行测试，不要忘记传入参数。<br>注意：</p>
+<ul>
+<li>1.在Python中，若两数相除取整数位应为‘ // ’，这点与C语言不同。</li>
+<li>2.在Python中是没有指针的，文章中所说只是方便理解，请见谅。</li>
 </ul>
 
       
@@ -291,7 +294,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://runze-li.github.io/2020/10/01/test3/" title="Sort" target="_blank" rel="external">https://runze-li.github.io/2020/10/01/test3/</a>
+      <a href="https://runze-li.github.io/2020/10/02/Binary-Search/" title="Binary_Search" target="_blank" rel="external">https://runze-li.github.io/2020/10/02/Binary-Search/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -334,16 +337,6 @@
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
-  
-  <ul class="pager pull-left">
-    
-    
-    <li class="next">
-      <a href="/2020/09/30/test2/" title="Test_1"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
-    </li>
-    
-    
-  </ul>
   
   
   <!-- Button trigger modal -->
