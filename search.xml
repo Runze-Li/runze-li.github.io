@@ -3,9 +3,14 @@
   <entry>
     <title>Sort</title>
     <url>/2020/10/01/test3/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<ul>
+<li><p>Sort 是Python的内置函数，是最简单的排序方式。代码如下：</p>
+<p>  list1 = [1,3,4,2,5]<br>  list1.sort()<br>  print(list1)</p>
+</li>
+</ul>
+]]></content>
       <tags>
-        <tag>Python sort函数作为内置函数，有着它自己的魅力</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
   <entry>
