@@ -35,7 +35,7 @@
     for i in range(n-1,-1,-1):  
         lis[0],lis[i] = lis[i],lis[0]  #将最后一个数与第一个数进行交换，重新筛选
         sift(lis,0,i - 1)</code></pre>
-<p>最终，即可取得排序好的列表。</p>
+<p>最终，即可取得排序好的列表，由代码可见，堆排序的时间复杂度为O (nlgn)。</p>
 ]]></content>
       <tags>
         <tag>Python</tag>
