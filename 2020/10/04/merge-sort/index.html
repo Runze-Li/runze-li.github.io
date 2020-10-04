@@ -17,23 +17,28 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>二分搜索 | Hexo</title>
-  <meta name="description" content="计算机算法中有两个大类：搜索、排序。在学习查找算法时，我们首先学习的就是二分搜索，下面就是我对二分搜索的一些理解：二分搜索作为一个基础查找算法，适用于列表中查找数据，其时间复杂度为O(log2n)，但是，该方法有着一个弊端就是需要列表内的数据是按顺序由小到大进行排列的，因此，可参照我的其他文章了解排序算法。二分搜索的原理很简单，对一个有序序列进行搜索，在搜索过程中，先确定左右指针（left，rig">
+  <title>归并排序 | Hexo</title>
+  <meta name="description" content="这次要和大家聊一聊归并排序，那么什么是归并排序呢，首先给大家举一个简单的例子：****如上图，我们得到一个列表，其实这个列表有一个规律，那就是如果我们从中间截断，左右两边的小列表其实是有序的，在学习数据结构时，我们学习过一个经典例题，合并两个有序数组，那么这个时候是不是可以像合并数组那样合并这两个有序数列。****如上图，我们把这个列表分为两段，标记好起始元素位置（low）和终止元素位置（high">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二分搜索">
-<meta property="og:url" content="https://runze-li.github.io/2020/10/02/Binary-Search/index.html">
+<meta property="og:title" content="归并排序">
+<meta property="og:url" content="https://runze-li.github.io/2020/10/04/merge-sort/index.html">
 <meta property="og:site_name" content="RunzeLi&#39;s Blog">
-<meta property="og:description" content="计算机算法中有两个大类：搜索、排序。在学习查找算法时，我们首先学习的就是二分搜索，下面就是我对二分搜索的一些理解：二分搜索作为一个基础查找算法，适用于列表中查找数据，其时间复杂度为O(log2n)，但是，该方法有着一个弊端就是需要列表内的数据是按顺序由小到大进行排列的，因此，可参照我的其他文章了解排序算法。二分搜索的原理很简单，对一个有序序列进行搜索，在搜索过程中，先确定左右指针（left，rig">
+<meta property="og:description" content="这次要和大家聊一聊归并排序，那么什么是归并排序呢，首先给大家举一个简单的例子：****如上图，我们得到一个列表，其实这个列表有一个规律，那就是如果我们从中间截断，左右两边的小列表其实是有序的，在学习数据结构时，我们学习过一个经典例题，合并两个有序数组，那么这个时候是不是可以像合并数组那样合并这两个有序数列。****如上图，我们把这个列表分为两段，标记好起始元素位置（low）和终止元素位置（high">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-02T08:11:53.000Z">
-<meta property="article:modified_time" content="2020-10-04T08:54:38.102Z">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/04/merge-sort/1.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/04/merge-sort/2.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/04/merge-sort/3.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/04/merge-sort/4.jpg">
+<meta property="article:published_time" content="2020-10-04T06:58:21.000Z">
+<meta property="article:modified_time" content="2020-10-04T08:56:46.414Z">
 <meta property="article:author" content="RunzeLi">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="搜索">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://runze-li.github.io/2020/10/04/merge-sort/1.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://runze-li.github.io/2020/10/02/Binary-Search/index.html">
+  <link rel="canonical" href="https://runze-li.github.io/2020/10/04/merge-sort/index.html">
   
     <link rel="alternate" href="/atom.xml" title="RunzeLi&#39;s Blog" type="application/atom+xml">
   
@@ -301,14 +306,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Binary-Search" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-merge-sort" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      二分搜索
+      归并排序
     </h1>
   
 
@@ -316,52 +321,66 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/10/02/Binary-Search/" class="article-date">
-	  <time datetime="2020-10-02T08:11:53.000Z" itemprop="datePublished">2020-10-02</time>
+	<a href="/2020/10/04/merge-sort/" class="article-date">
+	  <time datetime="2020-10-04T06:58:21.000Z" itemprop="datePublished">2020-10-04</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E6%90%9C%E7%B4%A2/">搜索</a>
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F/">排序</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a>, <a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a>, <a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/02/Binary-Search/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/04/merge-sort/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>计算机算法中有两个大类：搜索、排序。在学习查找算法时，我们首先学习的就是二分搜索，下面就是我对二分搜索的一些理解：<br>二分搜索作为一个基础查找算法，适用于列表中查找数据，其时间复杂度为O(log2n)，但是，该方法有着一个弊端就是需要列表内的数据是按顺序由小到大进行排列的，因此，可参照我的其他文章了解排序算法。<br>二分搜索的原理很简单，对一个有序序列进行搜索，在搜索过程中，先确定左右指针（left，right）每次取中间数（mid）的值与目标值（value）进行比较，若mid值大于目标值（value），则将右指针（right）放与mid指针左边即mid - 1处，反之，若mid值小于目标值（value），则将左指针（left）放与mid指针右边即mid + 1处。最终，若判定到mid指针处的值为目标值（value），则返回此时mid指针位置。</p>
-<p>代码如下：</p>
-<pre><code>def binary_search(Inp_list,val):  #定义二分搜索函数，两个参数为待搜索列表和目标值
-   left = 0  #左指针初始位置为0
-   right = len(Inp_list) - 1  #右指针初始位置为最右侧数位置
-   while right &gt;= left:  
-        mid = (left + right) // 2  #mid指针位置为left与right中间值
-        if Inp_list[mid] == val:  
-            return mid  
-        else:  
-            if Inp_list[mid] &gt; val:  
-                right = mid - 1  
-            else:  
-                left = mid + 1</code></pre>
-<p>在创建列表时，Python不像C语言那样创建数组，Python中的数组是以列表形式呈现，若手动输入数字需使用Python的列表生成式，代码如下。</p>
-<pre><code>list1 = [int(n) for n in input().split()]</code></pre>
-<p>最后可进行测试，不要忘记传入参数。<br>注意：</p>
-<ul>
-<li>1.在Python中，若两数相除取整数位应为‘ // ’，这点与C语言不同。</li>
-<li>2.在Python中是没有指针的，文章中所说只是方便理解，请见谅。</li>
-</ul>
+        <p>这次要和大家聊一聊归并排序，那么什么是归并排序呢，首先给大家举一个简单的例子：<br>**<img src="/2020/10/04/merge-sort/1.jpg" class title="图1">**<br>如上图，我们得到一个列表，其实这个列表有一个规律，那就是如果我们从中间截断，左右两边的小列表其实是有序的，在学习数据结构时，我们学习过一个经典例题，合并两个有序数组，那么这个时候是不是可以像合并数组那样合并这两个有序数列。<br>**<img src="/2020/10/04/merge-sort/2.jpg" class title="图2">**<br>如上图，我们把这个列表分为两段，标记好起始元素位置（low）和终止元素位置（high）以及两地址的中间地址（mid），其实，我们已经把整个列表以mid为中心，分成两个小列表了，这个时候就可以利用归并（merge）的思想，首先我们取到两个指针，i，j，这两个指针分别指向两个小列表的第一个元素，这个时候，我们比较i位置的元素大小和j位置的元素大小，我们假设这个列表为lis,那么lis[i] &lt; lis[j]的话，是不是就可以断定，lis[i]此时的元素就是最小的元素了，反之，要是lis[j] &lt; lis[i]，那么lis[j]就是整个列表中最小的元素，这个时候我们就可以把这个最小的元素取出放于一个新列表的首位，我们假设这个新列表是ltmp，这个时候，按照我们的例子，1 就被取下放置于我们的新列表中了，同时，j指针的位置要向后移动一位。<br>**<img src="/2020/10/04/merge-sort/3.jpg" class title="图3">**<br>以此类推，比较i位置与j位置的大小关系，然后把每一次的最小值暂存到新列表（ltmp）中，不要忘记指针随着原位置数的取出而后移。<br>**<img src="/2020/10/04/merge-sort/4.jpg" class title="图4">**<br>那么什么时候终止呢？有两种情况，第一种是 i 指针大于mid位置的时候，第二种是 j 指针大于high位置的时候。终止后会也会发现两种情况，要么是左边的小列表数字有剩余，要么是右边的小列表数字有剩余，这个时候，我们知道，左右两边的列表其实是有序的，那么本身不需要再进行排列了，直接放到新列表（ltmp）的末尾就好，最后，我们只要把新列表（ltmp）再归还给原列表（lis）就完成了一次归并（merge）。代码如下：</p>
+<pre><code>def merge(lis,low,mid,high):  
+    i = low  
+    j = mid + 1  
+    ltmp = []  
+    while i &lt;= mid and j &lt;= high:  
+        if lis[i] &lt; lis[j]:  
+            ltmp.append(lis[i])  
+            i = i + 1  
+        if lis[j] &lt; lis[i]:  
+            ltmp.append(lis[j])  
+            j = j + 1  
+    while i &lt;= mid:  
+        ltmp.append(lis[i])  
+        i = i + 1  
+    while j &lt;= high:  
+        ltmp.append(lis[j])  
+        j = j + 1  
+    lis[low:high+1] = ltmp</code></pre>
+<p>接下来就是整个归并排序的核心了，在实际排序过程中，我们几乎很少能遇到上文这种理想的情况，我们得到的列表大多是无序的。那么，如何能通过归并的方式得到排序的结果呢？<br>答案是采取一种递归的思想，先分解再合并，我们将原列表分解为一个个的小列表，每个小列表之间进行归并（merge），然后最终小列表合并成大列表，如下图所示，即可得到一个有序列表。<br>****<br>归并排序代码如下：</p>
+<pre><code>def merge_sort(lis,low,high):  
+    if low &lt; high:  
+        mid = (low + high) // 2  
+        merge_sort(lis,low,mid)  
+        merge_sort(lis,mid+1,high)  
+        merge(lis,low,mid,high)  
+    return lis</code></pre>
+<p>是不是看起来很简单，但是理解起来有些难度，这里采用递归的思想，假如，代码的倒数第二行我们不进行归并，而是对此时的递归进行打印：</p>
+<pre><code>def merge_sort_view(lis,low,high):  
+    if low &lt; high:  
+        mid = (low + high) // 2  
+        merge_sort_view(lis,low,mid)  
+        merge_sort_view(lis,mid+1,high)  
+        print(lis[low:high+1])</code></pre>
+<p>那么我们会得到如下的结果：<br>[11, 8]<br>[3, 9]<br>[11, 8, 3, 9]<br>[7, 1]<br>[2, 5]<br>[7, 1, 2, 5]<br>[11, 8, 3, 9, 7, 1, 2, 5]<br>可以看出，我们在递归过程中，只有当low和high均为 1 时会结束递归，然后当加上归并（merge）函数后，即可进行合并。<br>归并排序的时间复杂度无论什么情况都是O (nlogn)，归并排序是Python内置sort函数的底层之一，内置函数是基于归并排序和插入排序的优化算法，因此，学习Python，了解归并排序是必不可少的。</p>
 
       
     </div>
@@ -371,7 +390,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://runze-li.github.io/2020/10/02/Binary-Search/" title="二分搜索" target="_blank" rel="external">https://runze-li.github.io/2020/10/02/Binary-Search/</a>
+      <a href="https://runze-li.github.io/2020/10/04/merge-sort/" title="归并排序" target="_blank" rel="external">https://runze-li.github.io/2020/10/04/merge-sort/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -417,10 +436,10 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/10/02/Quick-Sort-Partition/" title="快速排序"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
     
+    <li class="next">
+      <a href="/2020/10/03/heap-sort/" title="堆排序"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
     
     
   </ul>

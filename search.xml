@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>归并排序</title>
+    <url>/2020/10/04/merge-sort/</url>
+    <content><![CDATA[<p>这次要和大家聊一聊归并排序，那么什么是归并排序呢，首先给大家举一个简单的例子：<br>**<img src="/2020/10/04/merge-sort/1.jpg" class title="图1">**<br>如上图，我们得到一个列表，其实这个列表有一个规律，那就是如果我们从中间截断，左右两边的小列表其实是有序的，在学习数据结构时，我们学习过一个经典例题，合并两个有序数组，那么这个时候是不是可以像合并数组那样合并这两个有序数列。<br>**<img src="/2020/10/04/merge-sort/2.jpg" class title="图2">**<br>如上图，我们把这个列表分为两段，标记好起始元素位置（low）和终止元素位置（high）以及两地址的中间地址（mid），其实，我们已经把整个列表以mid为中心，分成两个小列表了，这个时候就可以利用归并（merge）的思想，首先我们取到两个指针，i，j，这两个指针分别指向两个小列表的第一个元素，这个时候，我们比较i位置的元素大小和j位置的元素大小，我们假设这个列表为lis,那么lis[i] &lt; lis[j]的话，是不是就可以断定，lis[i]此时的元素就是最小的元素了，反之，要是lis[j] &lt; lis[i]，那么lis[j]就是整个列表中最小的元素，这个时候我们就可以把这个最小的元素取出放于一个新列表的首位，我们假设这个新列表是ltmp，这个时候，按照我们的例子，1 就被取下放置于我们的新列表中了，同时，j指针的位置要向后移动一位。<br>**<img src="/2020/10/04/merge-sort/3.jpg" class title="图3">**<br>以此类推，比较i位置与j位置的大小关系，然后把每一次的最小值暂存到新列表（ltmp）中，不要忘记指针随着原位置数的取出而后移。<br>**<img src="/2020/10/04/merge-sort/4.jpg" class title="图4">**<br>那么什么时候终止呢？有两种情况，第一种是 i 指针大于mid位置的时候，第二种是 j 指针大于high位置的时候。终止后会也会发现两种情况，要么是左边的小列表数字有剩余，要么是右边的小列表数字有剩余，这个时候，我们知道，左右两边的列表其实是有序的，那么本身不需要再进行排列了，直接放到新列表（ltmp）的末尾就好，最后，我们只要把新列表（ltmp）再归还给原列表（lis）就完成了一次归并（merge）。代码如下：</p>
+<pre><code>def merge(lis,low,mid,high):  
+    i = low  
+    j = mid + 1  
+    ltmp = []  
+    while i &lt;= mid and j &lt;= high:  
+        if lis[i] &lt; lis[j]:  
+            ltmp.append(lis[i])  
+            i = i + 1  
+        if lis[j] &lt; lis[i]:  
+            ltmp.append(lis[j])  
+            j = j + 1  
+    while i &lt;= mid:  
+        ltmp.append(lis[i])  
+        i = i + 1  
+    while j &lt;= high:  
+        ltmp.append(lis[j])  
+        j = j + 1  
+    lis[low:high+1] = ltmp</code></pre>
+<p>接下来就是整个归并排序的核心了，在实际排序过程中，我们几乎很少能遇到上文这种理想的情况，我们得到的列表大多是无序的。那么，如何能通过归并的方式得到排序的结果呢？<br>答案是采取一种递归的思想，先分解再合并，我们将原列表分解为一个个的小列表，每个小列表之间进行归并（merge），然后最终小列表合并成大列表，如下图所示，即可得到一个有序列表。<br>****<br>归并排序代码如下：</p>
+<pre><code>def merge_sort(lis,low,high):  
+    if low &lt; high:  
+        mid = (low + high) // 2  
+        merge_sort(lis,low,mid)  
+        merge_sort(lis,mid+1,high)  
+        merge(lis,low,mid,high)  
+    return lis</code></pre>
+<p>是不是看起来很简单，但是理解起来有些难度，这里采用递归的思想，假如，代码的倒数第二行我们不进行归并，而是对此时的递归进行打印：</p>
+<pre><code>def merge_sort_view(lis,low,high):  
+    if low &lt; high:  
+        mid = (low + high) // 2  
+        merge_sort_view(lis,low,mid)  
+        merge_sort_view(lis,mid+1,high)  
+        print(lis[low:high+1])</code></pre>
+<p>那么我们会得到如下的结果：<br>[11, 8]<br>[3, 9]<br>[11, 8, 3, 9]<br>[7, 1]<br>[2, 5]<br>[7, 1, 2, 5]<br>[11, 8, 3, 9, 7, 1, 2, 5]<br>可以看出，我们在递归过程中，只有当low和high均为 1 时会结束递归，然后当加上归并（merge）函数后，即可进行合并。<br>归并排序的时间复杂度无论什么情况都是O (nlogn)，归并排序是Python内置sort函数的底层之一，内置函数是基于归并排序和插入排序的优化算法，因此，学习Python，了解归并排序是必不可少的。</p>
+]]></content>
+      <categories>
+        <category>排序</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>算法</tag>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>堆排序</title>
     <url>/2020/10/03/heap-sort/</url>
     <content><![CDATA[<p>学习过堆排序后，今天我们来学习一下堆排序，在学习堆排序之前，我们首先来简单学习一下树的基本知识。<br>树是一种数据结构，它是由n（n&gt;=1）个有限结点组成一个具有层次关系的集合。虽然将其称之为树，但它是树根在上，叶子在下的结构，每棵树都具有如下特点：</p>
@@ -35,8 +83,40 @@
     for i in range(n-1,-1,-1):  
         lis[0],lis[i] = lis[i],lis[0]  #将最后一个数与第一个数进行交换，重新筛选
         sift(lis,0,i - 1)</code></pre>
-<p>最终，即可取得排序好的列表，由代码可见，堆排序的时间复杂度为O (nlgn)。</p>
+<p>最终，即可取得排序好的列表，由代码可见，堆排序的时间复杂度为O (nlgn)。<br>其实，即使堆排序和快速排序的时间复杂度都是O (nlgn)，但是在实际操作中，还是快速排序会快一些，堆排序也有它独有的优势，例如说我们要解决的TopK问题，例如说我想要找到某个数列中最大的前K个数，那么我们可以考虑以下几点，第一个是排序后切片，其时间复杂度为O (nlgn)，第二种是利用基本排序方式，例如冒泡排序，其时间复杂度为O (Kn)，如果K &lt; lgn，那么其实第二种方法是快于第一种的，那么第三种方式就是利用堆排序的逐一出数，取前K项。其时间复杂度为O (nlgK)，时间应为最低。但这种方式与堆排序不同，这需要将原二叉树变换为小根堆，在上文我们提及了大根堆，保证每一个父节点都大于其子节点，那么同理，小根堆中，所有父节点也一定小于子节点，代码如下：</p>
+<pre><code>def sift(lis,root,last):            
+  i = root  
+  j = 2 * i + 1 #j是左孩子  
+  tmp = lis[root]               
+  while j &lt;= last:  
+        if j + 1 &lt;= last and lis[j+1] &lt; lis[j]:  #注意，这里的小根堆相较于大根堆改成了小于号
+            j = j + 1  
+        if lis[j] &lt; tmp:                         #同理，这里也要变为小于号
+            lis[i] = lis[j]  
+            i = j  
+            j = 2 * i + 1  
+        else:  
+            lis[i] = tmp  
+            break  
+ else:  
+        lis[i] = tmp
+
+def topk(lis,k):                                #选择前K项的函数
+    heap = lis[0:k]  
+    # 1.建堆  
+  for i in range((k-2)//2,-1,-1):  
+        sift(heap,i,k-1)  
+    #2.遍历  
+  for i in range(k,len(lis)-1):  
+        if lis[i] &gt; heap[0]:  
+            heap[0] = lis[i]  
+            sift(heap,0,k-1)  
+    #3.出数  
+  return heap</code></pre>
 ]]></content>
+      <categories>
+        <category>排序</category>
+      </categories>
       <tags>
         <tag>Python</tag>
         <tag>算法</tag>
@@ -100,9 +180,12 @@
         _quick_sort(li,0,len(li) - 1)</code></pre>
 <p>注意：</p>
 <ul>
-<li>在这种方式的快排过程中，在取首位为基准数时，若首位本身为这个列表的最大值，那么时间复杂度也会随之提高，因此，建议可在选择基准数时进行随机选择，尽可能减少该情况的发生。</li>
+<li>在这种方式的快排过程中，在取首位为基准数时，若首位本身为这个列表的最大值，那么时间复杂度也会随之提高O（n^2），因此，建议可在选择基准数时进行随机选择，尽可能减少该情况的发生。</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>排序</category>
+      </categories>
       <tags>
         <tag>Python</tag>
         <tag>算法</tag>
@@ -134,6 +217,9 @@
 <li>2.在Python中是没有指针的，文章中所说只是方便理解，请见谅。</li>
 </ul>
 ]]></content>
+      <categories>
+        <category>搜索</category>
+      </categories>
       <tags>
         <tag>Python</tag>
         <tag>算法</tag>
