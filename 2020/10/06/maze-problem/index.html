@@ -17,24 +17,26 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>分类: 排序 | LiRunze&#39;s Blog</title>
-  <meta name="description" content="一个集百家所长的优质Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="RunzeLi&#39;s Blog">
-<meta property="og:url" content="https://runze-li.github.io/categories/%E6%8E%92%E5%BA%8F/index.html">
+  <title>迷宫问题--浅谈深度优先搜索 | LiRunze&#39;s Blog</title>
+  <meta name="description" content="在数据结构中，我们先学习的是栈和队列，在本文中，我们来简单聊一聊栈。栈（stack）又名堆栈，它是一种运算受限的线性表。限定仅在表尾进行插入和删除操作的线性表。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。****由上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迷宫问题--浅谈深度优先搜索">
+<meta property="og:url" content="https://runze-li.github.io/2020/10/06/maze-problem/index.html">
 <meta property="og:site_name" content="RunzeLi&#39;s Blog">
-<meta property="og:description" content="一个集百家所长的优质Blog">
+<meta property="og:description" content="在数据结构中，我们先学习的是栈和队列，在本文中，我们来简单聊一聊栈。栈（stack）又名堆栈，它是一种运算受限的线性表。限定仅在表尾进行插入和删除操作的线性表。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。****由上">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/06/maze-problem/1.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/06/maze-problem/2.jpg">
+<meta property="article:published_time" content="2020-10-06T13:30:07.000Z">
+<meta property="article:modified_time" content="2020-10-06T13:49:03.550Z">
 <meta property="article:author" content="RunzeLi">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="C++">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="TensorFlow">
-<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="搜索">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://runze-li.github.io/2020/10/06/maze-problem/1.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://runze-li.github.io/categories/%E6%8E%92%E5%BA%8F/index.html">
+  <link rel="canonical" href="https://runze-li.github.io/2020/10/06/maze-problem/index.html">
   
     <link rel="alternate" href="/atom.xml" title="RunzeLi&#39;s Blog" type="application/atom+xml">
   
@@ -314,77 +316,186 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">分类: 排序</h1>
-      <p class="hidden-xs">共 4 篇文章</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/搜索/">搜索</a></li>
-          
-          <li><a href="/categories/排序/">排序</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapse排序" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              排序
-            </a>
-            <small class="text-muted">(Total 4 articles)</small>
-        </h4>
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-maze-problem" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      迷宫问题--浅谈深度优先搜索
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/10/06/maze-problem/" class="article-date">
+	  <time datetime="2020-10-06T13:30:07.000Z" itemprop="datePublished">2020-10-06</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%90%9C%E7%B4%A2/">搜索</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a>, <a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/06/maze-problem/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
     </div>
-    <div id="collapse排序" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading排序">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/2020/10/05/low-sort/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-10-05T13:33:00.000Z" itemprop="datePublished">2020-10-05</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 三种基本排序
-</a>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>在数据结构中，我们先学习的是栈和队列，在本文中，我们来简单聊一聊栈。栈（stack）又名堆栈，它是一种运算受限的线性表。限定仅在表尾进行插入和删除操作的线性表。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。<br>**<img src="/2020/10/06/maze-problem/1.jpg" class title="图1">**<br>由上图我们可以看出，栈的底部是封死的，因此栈的特点就是先进后出，后进先出。<br>现在我们来看一道迷宫问题,现在想从上边的红块走到下面的红块，期间，我们需要避开所有的蓝块，且只可以选择 上 下 左 右 四个方向来移动，最终请输出每次移动的坐标，若不存在这条道路，就输出没有该路径。<br>**<img src="/2020/10/06/maze-problem/2.jpg" class title="图2">**<br>可见上图，为本次的迷宫示意图，为方便大家代码实现，现给出该迷宫的数字表达形式：</p>
+<pre><code>maze = [  
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  
+  [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],  
+  [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],  
+  [1, 0, 0, 0, 0, 1, 1, 0, 0, 1],  
+  [1, 0, 1, 1, 1, 0, 0, 0, 0, 1],  
+  [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],  
+  [1, 0, 1, 0, 0, 0, 1, 0, 0, 1],  
+  [1, 0, 1, 1, 1, 0, 1, 1, 0, 1],  
+  [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],  
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  
+]</code></pre>
+<p>其中，1 代表蓝块，0 为可走的白块，（1，1）为起始点，（8，8）为终止点。</p>
 
-
-              
-                
-<a href="/2020/10/04/merge-sort/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-10-04T06:58:21.000Z" itemprop="datePublished">2020-10-04</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 归并排序
-</a>
-
-
-              
-                
-<a href="/2020/10/03/heap-sort/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-10-03T08:47:23.000Z" itemprop="datePublished">2020-10-03</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 堆排序
-</a>
-
-
-              
-                
-<a href="/2020/10/02/Quick-Sort-Partition/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-10-02T12:52:17.000Z" itemprop="datePublished">2020-10-02</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 快速排序
-</a>
-
-
-              
-            </div>
-        </div>
+      
     </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://runze-li.github.io/2020/10/06/maze-problem/" title="迷宫问题--浅谈深度优先搜索" target="_blank" rel="external">https://runze-li.github.io/2020/10/06/maze-problem/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/Runze-Li" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/Runze-Li" target="_blank"><span class="text-dark">Runze Li</span><small class="ml-1x">记录生活，记录每一次所得。</small></a></h3>
+        <div>喜欢博主的记得打赏下哦！</div>
+      </div>
+    </figure>
+  </div>
 </div>
+
+
     </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2020/10/05/low-sort/" title="三种基本排序"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -441,6 +552,37 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'OQsqII4iMg5HCgaePn3ik0B4-gzGzoHsz',
+    appKey: 'NGkPAUtW5YdVsmBLo3qloWY5',
+    placeholder: '在评论区发表一下你的观点吧 !!!',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
