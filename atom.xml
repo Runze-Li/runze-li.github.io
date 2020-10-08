@@ -6,7 +6,7 @@
   <link href="https://runze-li.github.io/atom.xml" rel="self"/>
   
   <link href="https://runze-li.github.io/"/>
-  <updated>2020-10-07T07:04:40.029Z</updated>
+  <updated>2020-10-08T13:21:24.632Z</updated>
   <id>https://runze-li.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迷宫问题2--浅谈广度优先搜索</title>
+    <link href="https://runze-li.github.io/2020/10/07/maze-problem-queue/"/>
+    <id>https://runze-li.github.io/2020/10/07/maze-problem-queue/</id>
+    <published>2020-10-07T07:30:07.000Z</published>
+    <updated>2020-10-08T13:21:24.632Z</updated>
+    
+    <content type="html"><![CDATA[<p>上期文章中，我们通过迷宫问题引入了深度优先搜索，采用了一种利用栈的思想，在本文中，将为大家引入广度优先搜索的思想，利用了一种队列的方式。首先，什么是广度优先搜索？广度优先搜索算法（Breadth-First Search，BFS）是一种盲目搜寻法，目的是系统地展开并检查图中的所有节点，以找寻结果。换句话说，它并不考虑结果的可能位置，彻底地搜索整张图，直到找到结果为止。BFS并不使用经验法则算法。<br>那么，广搜与深搜的区别是什么呢？其实很容易区分，深搜可以理解为按照顺序来搜索，譬如说我能走上就绝不走下了，直到没路了再回溯回来尝试向下走，而广搜不同，广搜同时走很多路径，只要能走，就全都一起走，直到有一个点到了终点就终止搜索，接下来，给大家模拟一下使用广度优先搜索的过程，就一目了然了。<br>我们依旧以之前的图说明，先声明一下，图中的数字是走的第几次，也就是到第几步，箭头是说明该点是哪个节点的下一节点，说白了就是两个点之间的引出关系，方便大家的理解。<br>**<img src="/2020/10/07/maze-problem-queue/1.jpg" class title="图1">**<br>由图我们可以看出，一个节点可以同时引出不止一个节点，直到最终有点触碰到了终点，则停止继续搜索，其实可以看出，广搜搜索到的路径一定是最短路径。<br>接下来给大家聊一下广搜路径的输出方式，在上文中我们已经了解到，每一个节点都是被其上一节点所引出，找到终点后，其实我们需要对路径进行回推。因此，每一个节点，我们都需要有一个下标作为其地址，方便最后的反向找路。那么就会有人提出问题，如何获得下标，规则是什么？我们假定一个列表（path），用于存取这些坐标，那么我们可以考虑以元组形式进行存储即（横坐标，纵坐标，下标），那么当第一个元素进队后，将其出队存储于我们新创建的path列表中，然后寻找下一个节点，那么下标如何定义，我们举一个简单的例子：<br>**<img src="/2020/10/07/maze-problem-queue/2.jpg" class title="图2">**<br>如上图，我们想从 1 走到 7。<br>首先是1 进队列，然后存入path列表中，由于它是首元素，我们给它个下标 -1，我们观察到下一次进队的可以有2和3，那么2和3的下标该怎么给，可以采取这个规则，看是谁让它来的，比如说2和3，是1让他俩来的，那么给他俩的下标就都是 1 的位置 0 ，再往下看，4和5都是由2引进来的，那么他俩的下标就是2这个元素的位置 1，接下来就是7由5引进，7下标是5的位置，以此类推。<br>那么我按照广搜加下标是不是可列出下面的表格：<br>**<img src="/2020/10/07/maze-problem-queue/3.jpg" class title="图3">**<br>接下来，我们就可以按这个表格，从7往回找，7按下标找到5，5找到2，2找到1，发现1的下标是-1 则终止。<br>那么如何思路有了，如何进行代码实现呢？首先我们可以调用队列的类库：</p><pre><code>from collections import deque</code></pre><p>然后我们依然用上次的迷宫以及四种移动方式：</p><pre><code>maze = [    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],    [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],    [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],    [1, 0, 0, 0, 0, 1, 1, 0, 0, 1],    [1, 0, 1, 1, 1, 0, 0, 0, 0, 1],    [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],    [1, 0, 1, 0, 0, 0, 1, 0, 0, 1],    [1, 0, 1, 1, 1, 0, 1, 1, 0, 1],    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  ]  dircs = [      lambda x, y: (x + 1, y),      lambda x, y: (x - 1, y),      lambda x, y: (x, y + 1),      lambda x, y: (x, y - 1),  ]</code></pre><p>接下来就是主题代码了，首先我们先模拟出输出函数：</p><pre><code>def print_path(path):      headnode = path[-1]  # 首先找到存的最后一个位置    real_path = []       # 定义一个新列表存放坐标    while headnode[2] != -1:  # 只要下标不为 -1        real_path.append(headnode[0:2])  # 将该坐标放入新列表        headnode = path[headnode[2]]       # 新判断位置    real_path.append(headnode[0:2])       # 将起点放入    real_path.reverse()                   # 倒叙输出    for node in real_path:          print(node)</code></pre><p>最后就是广搜的部分了：</p><pre><code>def maze_path_queue(x1, y1, x2, y2):      queue = deque()          # 定义一个队列    maze[x1][y1] = 2          # 标记起点走过    queue.append((x1, y1, -1))      # 将起点放入队首    path = []                          # 定义路径列表    while len(queue) &gt; 0:              # 只要队列不为空        headnode = queue.popleft()  # 队首出列        path.append(headnode)          # 将队首放入路径内        if headnode[0] == x2 and headnode[1] == y2:    # 如果发现此时队首是终点则输出              print_path(path)              return True          for dir in dircs:              # 执行移动方法            nextnode = dir(headnode[0], headnode[1])              if maze[nextnode[0]][nextnode[1]] == 0:  # 如果下一个点是可走点                queue.append((nextnode[0], nextnode[1], len(path) - 1)) # 下一节点入队并记录下标                                                                        # 下标记录谁带它来的                maze[nextnode[0]][nextnode[1]] = 2   # 标记该点已经走过     else:          print(&quot;There is no way!&quot;)      # 如果队空，则证明没有路        return False</code></pre><p>这就是整个迷宫问题的解决方式，大家有哪些不懂的地方可发布在评论区。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;上期文章中，我们通过迷宫问题引入了深度优先搜索，采用了一种利用栈的思想，在本文中，将为大家引入广度优先搜索的思想，利用了一种队列的方式。首先，什么是广度优先搜索？广度优先搜索算法（Breadth-First Search，BFS）是一种盲目搜寻法，目的是系统地展开并检查图中</summary>
+      
+    
+    
+    
+    <category term="搜索" scheme="https://runze-li.github.io/categories/%E6%90%9C%E7%B4%A2/"/>
+    
+    
+    <category term="Python" scheme="https://runze-li.github.io/tags/Python/"/>
+    
+    <category term="算法" scheme="https://runze-li.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="搜索" scheme="https://runze-li.github.io/tags/%E6%90%9C%E7%B4%A2/"/>
+    
+  </entry>
   
   <entry>
     <title>迷宫问题--浅谈深度优先搜索</title>
@@ -41,6 +69,32 @@
     <category term="算法" scheme="https://runze-li.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
     <category term="搜索" scheme="https://runze-li.github.io/tags/%E6%90%9C%E7%B4%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 队列</title>
+    <link href="https://runze-li.github.io/2020/10/06/queue/"/>
+    <id>https://runze-li.github.io/2020/10/06/queue/</id>
+    <published>2020-10-06T13:30:07.000Z</published>
+    <updated>2020-10-08T11:08:53.004Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文将简单阐述一下Python数据结构中队列的原理即实现方式。<br>首先我们来看一下，什么是队列：<br>队列（queue）是只允许在一端进行插入操作，而在另一端进行删除操作的线性表。队列是一种先进先出（First in First Out）的线性表，简称FIFO。允许插入的一端称为队尾，允许删除的一端称为队头。假设队列是q=（a1,a2,…,an），那么a1就是队头元素，而an是队尾元素。这样我们就可以删除时，总是从a1开始，而插入时，列在最后。这也比较符合我们通常生活中的习惯，排在第一个的优先出列，最后来的当然在队伍的最后。<br>**<img src="/2020/10/06/queue/1.jpg" class title="图1">**<br>如上图所示，队列是一种先进先出的线性表，我们用 front 表示队首，rear 表示队尾，但是在实际的运用过程中，往往会出现一种“假溢出”现象。<br>那么什么是假溢出现象呢？可以理解为系统作为队列用的存储区还没有满,但队列却发生了溢出,我们把这种现象称为”假溢出”。<br>**<img src="/2020/10/06/queue/2.jpg" class title="图2">**<br>如上图所示，在队列我的front指针指向的是第一个元素对应的位置，rear指针指向的是最后一个元素所对应的下一个元素位置。<br>**<img src="/2020/10/06/queue/3.jpg" class title="图3">**<br>如上图所示，当我一出了a1，a2后，front指针也同时移动到了a3的位置，可是，由于队列只有五个元素的长度，当a5进队列后，rear指针无处可指，同时，我们还发现，队列中还存在着两个位置的空位，这就是这个队列的假溢出现象，那么为了解决这一问题，人们想到了一个新的存储方式—-循环队列。所谓循环队列，就是将向量空间想象为一个首尾相接的圆环，并称这种向量为循环向量。存储在其中的队列称为循环队列（Circular Queue）。循环队列是把顺序队列首尾相连，把存储队列元素的表从逻辑上看成一个环，成为循环队列。<br>**<img src="/2020/10/06/queue/4.jpg" class title="图4">**<br>如上图所示，就是一个循环队列的基本流程，但是，大家一定也发现了一个问题，为什么我们没有办法判断是否是队满还是队空呢？其实可以根据我们最原始的队列来看，如果front和rear指针相遇在一起，则证明这该队列是空队列，在循环队列中，当最后一个空间存入后，rear后移很容易与front指针再次相遇，因此，我们采取了牺牲一个存储空间的方式，来判断队满和队空。因此哦我们可以得到以下两个计算公式：<br>队列满的条件是：</p><pre><code>(rear+1)%QueueSize == front</code></pre><p>通用的计算队列长度的公式为：</p><pre><code>(rear - front+ QueueSize)%QueueSize</code></pre><p>那么我们要如何实现队列呢，当然可以使用列表，但是本文采用类的方式为大家实现一下队列的原理：</p><pre><code>class Queue:      def __init__(self,size = 100):  # 对队列进行初始化操作        self.queue = [0 for i in range(size)]          self.size = size                      self.rear = 0                  # 设定头指针和尾指针都为0号元素，此时队空        self.front = 0       def push(self, element):          # 定义入队操作        if not self.is_filled():      # 如果队不满            self.rear = (self.rear + 1) % self.size # 队尾指针应指向最后元素的下一地址              self.queue[self.rear] = element          # 将该元素放入队列        else:              raise IndexError(&quot;Queue is filled.&quot;)      # 反之则证明队满，告诉用户不要进了    def pop(self):          if not self.is_empty():      # 如果队不空            self.front = (self.front + 1) % self.size    # 队首指针指向下一元素              return self.queue[self.front]                # 返回队首元素          else:                                                       raise IndexError(&quot;Queue is empty.&quot;)        # 反之证明队空，则无元素可出    def is_empty(self):              # 定义队空，是两指针相等时        return self.rear == self.front      def is_filled(self):              #定义队满，按照上文公式        return (self.rear + 1) % self.size == self.front</code></pre><p>这就是整手写的队列过程。其实，在Python中并不需要这么麻烦，众所周知，Python是一门集百家所长的语言，我们可以import一个对自己有用的类库，譬如说 deque 这个类库。<br>首先进行一波引用：</p><pre><code>from collections import deque</code></pre><p>   该类库的特点就是已经帮我们写好了队列的这个类以及其中的成员函数，其中我们主要会用到如下这四个函数：</p><pre><code>   deque.append()        # 右侧进队   deque.pop()            # 右侧出队   deque.popleft()        # 左侧出队   deque.appendleft()    # 左侧进队</code></pre><p>  以上就是Python队列的大致原理及其特有类库，各位看官有何不懂之处，欢迎在评论区留言。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;本文将简单阐述一下Python数据结构中队列的原理即实现方式。&lt;br&gt;首先我们来看一下，什么是队列：&lt;br&gt;队列（queue）是只允许在一端进行插入操作，而在另一端进行删除操作的线性表。队列是一种先进先出（First in First Out）的线性表，简称FIFO。允许插</summary>
+      
+    
+    
+    
+    <category term="数据结构" scheme="https://runze-li.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="Python" scheme="https://runze-li.github.io/tags/Python/"/>
+    
+    <category term="数据结构" scheme="https://runze-li.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   

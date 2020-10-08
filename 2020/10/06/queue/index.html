@@ -17,32 +17,27 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>快速排序 | LiRunze&#39;s Blog</title>
-  <meta name="description" content="在排序算法中，有多种排序方式，例如比较低级的：冒泡排序、选择排序、插入排序。还有相对高级一些的排序方式，比如说这次要说的快速排序。快速排序相较于三种低级排序的优势在于其时间复杂度较小O (nlogn)，其利用了递归的思想，相较于循环结构，大大缩减了其排序时间，那么，快速排序的思想及原理是什么，下面我们来模拟一下。  图一  以上图为例，在介绍快速排序之前，首先想介绍一种算法，分割法（partiti">
+  <title>Python 队列 | LiRunze&#39;s Blog</title>
+  <meta name="description" content="本文将简单阐述一下Python数据结构中队列的原理即实现方式。首先我们来看一下，什么是队列：队列（queue）是只允许在一端进行插入操作，而在另一端进行删除操作的线性表。队列是一种先进先出（First in First Out）的线性表，简称FIFO。允许插入的一端称为队尾，允许删除的一端称为队头。假设队列是q&#x3D;（a1,a2,…,an），那么a1就是队头元素，而an是队尾元素。这样我们就可以删除时">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
-<meta property="og:url" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/index.html">
+<meta property="og:title" content="Python 队列">
+<meta property="og:url" content="https://runze-li.github.io/2020/10/06/queue/index.html">
 <meta property="og:site_name" content="RunzeLi&#39;s Blog">
-<meta property="og:description" content="在排序算法中，有多种排序方式，例如比较低级的：冒泡排序、选择排序、插入排序。还有相对高级一些的排序方式，比如说这次要说的快速排序。快速排序相较于三种低级排序的优势在于其时间复杂度较小O (nlogn)，其利用了递归的思想，相较于循环结构，大大缩减了其排序时间，那么，快速排序的思想及原理是什么，下面我们来模拟一下。  图一  以上图为例，在介绍快速排序之前，首先想介绍一种算法，分割法（partiti">
+<meta property="og:description" content="本文将简单阐述一下Python数据结构中队列的原理即实现方式。首先我们来看一下，什么是队列：队列（queue）是只允许在一端进行插入操作，而在另一端进行删除操作的线性表。队列是一种先进先出（First in First Out）的线性表，简称FIFO。允许插入的一端称为队尾，允许删除的一端称为队头。假设队列是q&#x3D;（a1,a2,…,an），那么a1就是队头元素，而an是队尾元素。这样我们就可以删除时">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/1.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/2.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/3.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/4.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/5.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/6.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/7.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/8.jpg">
-<meta property="article:published_time" content="2020-10-02T12:52:17.000Z">
-<meta property="article:modified_time" content="2020-10-04T08:56:31.003Z">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/06/queue/1.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/06/queue/2.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/06/queue/3.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/06/queue/4.jpg">
+<meta property="article:published_time" content="2020-10-06T13:30:07.000Z">
+<meta property="article:modified_time" content="2020-10-08T11:08:53.004Z">
 <meta property="article:author" content="RunzeLi">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="排序">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/1.jpg">
+<meta name="twitter:image" content="https://runze-li.github.io/2020/10/06/queue/1.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/index.html">
+  <link rel="canonical" href="https://runze-li.github.io/2020/10/06/queue/index.html">
   
     <link rel="alternate" href="/atom.xml" title="RunzeLi&#39;s Blog" type="application/atom+xml">
   
@@ -325,14 +320,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Quick-Sort-Partition" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-queue" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      快速排序
+      Python 队列
     </h1>
   
 
@@ -340,87 +335,71 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/10/02/Quick-Sort-Partition/" class="article-date">
-	  <time datetime="2020-10-02T12:52:17.000Z" itemprop="datePublished">2020-10-02</time>
+	<a href="/2020/10/06/queue/" class="article-date">
+	  <time datetime="2020-10-06T13:30:07.000Z" itemprop="datePublished">2020-10-06</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F/">排序</a>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a>, <a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/02/Quick-Sort-Partition/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/06/queue/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>在排序算法中，有多种排序方式，例如比较低级的：冒泡排序、选择排序、插入排序。还有相对高级一些的排序方式，比如说这次要说的快速排序。快速排序相较于三种低级排序的优势在于其时间复杂度较小O (nlogn)，其利用了递归的思想，相较于循环结构，大大缩减了其排序时间，那么，快速排序的思想及原理是什么，下面我们来模拟一下。</p>
-<ul>
-<li>图一</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/1.jpg" class title="图1"></strong><br>以上图为例，在介绍快速排序之前，首先想介绍一种算法，分割法（partition），这种算法实现的目的如下：</p>
-<ul>
-<li>图二</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/2.jpg" class title="图2"></strong><br>分割后的结果如下，可以看出，我们以首部数字作为基准，左侧的数字都比该数字要小，右侧的数字都比它要大，那么我们就可以用一种递归的思想进行排序了，例如说，基于上图，我们再对6的左右两边各进行一下partition函数，是不是就可以得到以下结果：</p>
-<ul>
-<li>图三</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/3.jpg" class title="图3"></strong><br>以此类推，是不是就能得到我们想要排序顺序了，但注意，在本次示例中函数的调用出现了一个问题，后续会给大家解释。<br>说了这么多，那什么是分割法（partition），它的原理思想是什么，下面我们一起看一下：<br>所谓分割法，就是取列表中的一个数，其余的数以它为基准，小于基准数的放于左侧，大于基准数的放于右侧 ，可是放置的方法是什么？下面给大家模拟一下：<br>还是以图一的列表为例，首先我们取首部数字为基准数字，如图一所示，我们取 6 作为基准数字，接下来开始进行模拟，假设我们设有两个指针分别置于左右两端（left，right）：</p>
-<ul>
-<li>图四</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/4.jpg" class title="图4"></strong><br>第一步，我们将首部的数字移开，那么该位置将变成一个空位置：</p>
-<ul>
-<li>图5</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/5.jpg" class title="图5"></strong><br>那么这个时候，left指针指向为空，我们需要从right指针处开始寻找，寻找一个比基准值小的数将它置于现在left指针所指向的空位置。right指针处的数字与基准数进行比较，若小于基准数，则将它置于left指针处，若大于，则right指针进行左移，以此类推，以本文数据为例，从最右侧的 7 进行比较，大于基准数则左移，5 小于6，则 5 填补空缺位置：</p>
-<ul>
-<li>图六</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/6.jpg" class title="图6"></strong><br>现在我们将五填补到了left指针所指的空缺位置，但此时我们会发现，right指针处出现了空缺，这个时候我们千万不要将基准数填补至空缺位置，而是采取和之前一样的办法，反过来，从left指针处开始，寻找比基准数要大的数来填补空缺，应从left指针处开始找，小于则left指针右移，大于则将该位置的数进行填补。由图六所示，从 5 开始，找到 8 ，然后将 8 填补到right指针所指位置，同时将left指针所指位置：</p>
-<ul>
-<li>图7</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/7.jpg" class title="图7"></strong><br>以此类推，left指针空缺，再从right指针开始寻找比基准数小的数填补空缺，反之，right指针处空缺，从left指针处寻找比基准数大的数填补空缺。直到left指针与right指针相遇了，那么将基准数填入此时left指针所指位置，即完成了整个分割过程。</p>
-<ul>
-<li>图8</li>
-</ul>
-<p><strong><img src="/2020/10/02/Quick-Sort-Partition/8.jpg" class title="图8"></strong><br>由此，就是我们整个分割算法的实现过程了，接下来就是代码的实现了。代码如下：</p>
-<pre><code>  def partition(li,left,right):  #划分  
-    tmp = li[left]               #设定tmp的值为基准值
-    while left &lt; right:  
-        while left &lt; right and li[right] &gt;= tmp:  
-            right = right - 1  
-        li[left] = li[right]     #若判断发现小于基准数，则将其填补空缺 
-        while left &lt; right and li[left] &lt;= tmp:  
-            left = left + 1  
-        li[right] = li[left]     #若判断发现大于基准数，则将其填补空缺 
-    li[left] = tmp               #基准值归位 
-    return left                  #返回右指针位置</code></pre>
-<p>接下来就是最终的代码实现了，快速排序是递归的过程，上文我们讲过，在基准数左右两边分别进行partition函数即可，首先基于partition函数的返回值，我们可以确定每一次基准数的最终位置，以此为中心，开始左右两边的递归，最终得到顺序结构。</p>
-<pre><code>    def _quick_sort(li, left, right):  
-      if left &lt; right:             
-        mid = partition(li,left,right) #找到每一次的基准数位置  
-        _quick_sort(li,left,mid - 1)   #左侧递归
-        _quick_sort(li,mid+1,right)    #右侧递归
-    def quick_sort(li):                 #简化快排函数的参数
-        _quick_sort(li,0,len(li) - 1)</code></pre>
-<p>注意：</p>
-<ul>
-<li>在这种方式的快排过程中，在取首位为基准数时，若首位本身为这个列表的最大值，那么时间复杂度也会随之提高O（n^2），因此，建议可在选择基准数时进行随机选择，尽可能减少该情况的发生。</li>
-</ul>
+        <p>本文将简单阐述一下Python数据结构中队列的原理即实现方式。<br>首先我们来看一下，什么是队列：<br>队列（queue）是只允许在一端进行插入操作，而在另一端进行删除操作的线性表。队列是一种先进先出（First in First Out）的线性表，简称FIFO。允许插入的一端称为队尾，允许删除的一端称为队头。假设队列是q=（a1,a2,…,an），那么a1就是队头元素，而an是队尾元素。这样我们就可以删除时，总是从a1开始，而插入时，列在最后。这也比较符合我们通常生活中的习惯，排在第一个的优先出列，最后来的当然在队伍的最后。<br>**<img src="/2020/10/06/queue/1.jpg" class title="图1">**<br>如上图所示，队列是一种先进先出的线性表，我们用 front 表示队首，rear 表示队尾，但是在实际的运用过程中，往往会出现一种“假溢出”现象。<br>那么什么是假溢出现象呢？可以理解为系统作为队列用的存储区还没有满,但队列却发生了溢出,我们把这种现象称为”假溢出”。<br>**<img src="/2020/10/06/queue/2.jpg" class title="图2">**<br>如上图所示，在队列我的front指针指向的是第一个元素对应的位置，rear指针指向的是最后一个元素所对应的下一个元素位置。<br>**<img src="/2020/10/06/queue/3.jpg" class title="图3">**<br>如上图所示，当我一出了a1，a2后，front指针也同时移动到了a3的位置，可是，由于队列只有五个元素的长度，当a5进队列后，rear指针无处可指，同时，我们还发现，队列中还存在着两个位置的空位，这就是这个队列的假溢出现象，那么为了解决这一问题，人们想到了一个新的存储方式—-循环队列。所谓循环队列，就是将向量空间想象为一个首尾相接的圆环，并称这种向量为循环向量。存储在其中的队列称为循环队列（Circular Queue）。循环队列是把顺序队列首尾相连，把存储队列元素的表从逻辑上看成一个环，成为循环队列。<br>**<img src="/2020/10/06/queue/4.jpg" class title="图4">**<br>如上图所示，就是一个循环队列的基本流程，但是，大家一定也发现了一个问题，为什么我们没有办法判断是否是队满还是队空呢？其实可以根据我们最原始的队列来看，如果front和rear指针相遇在一起，则证明这该队列是空队列，在循环队列中，当最后一个空间存入后，rear后移很容易与front指针再次相遇，因此，我们采取了牺牲一个存储空间的方式，来判断队满和队空。因此哦我们可以得到以下两个计算公式：<br>队列满的条件是：</p>
+<pre><code>(rear+1)%QueueSize == front</code></pre>
+<p>通用的计算队列长度的公式为：</p>
+<pre><code>(rear - front+ QueueSize)%QueueSize</code></pre>
+<p>那么我们要如何实现队列呢，当然可以使用列表，但是本文采用类的方式为大家实现一下队列的原理：</p>
+<pre><code>class Queue:  
+    def __init__(self,size = 100):  # 对队列进行初始化操作
+        self.queue = [0 for i in range(size)]  
+        self.size = size              
+        self.rear = 0                  # 设定头指针和尾指针都为0号元素，此时队空
+        self.front = 0   
+
+    def push(self, element):          # 定义入队操作
+        if not self.is_filled():      # 如果队不满
+            self.rear = (self.rear + 1) % self.size # 队尾指针应指向最后元素的下一地址  
+            self.queue[self.rear] = element          # 将该元素放入队列
+        else:  
+            raise IndexError(&quot;Queue is filled.&quot;)      # 反之则证明队满，告诉用户不要进了
+
+    def pop(self):  
+        if not self.is_empty():      # 如果队不空
+            self.front = (self.front + 1) % self.size    # 队首指针指向下一元素  
+            return self.queue[self.front]                # 返回队首元素  
+        else:                                           
+            raise IndexError(&quot;Queue is empty.&quot;)        # 反之证明队空，则无元素可出
+
+
+    def is_empty(self):              # 定义队空，是两指针相等时
+        return self.rear == self.front  
+
+    def is_filled(self):              #定义队满，按照上文公式
+        return (self.rear + 1) % self.size == self.front</code></pre>
+<p>这就是整手写的队列过程。其实，在Python中并不需要这么麻烦，众所周知，Python是一门集百家所长的语言，我们可以import一个对自己有用的类库，譬如说 deque 这个类库。<br>首先进行一波引用：</p>
+<pre><code>from collections import deque</code></pre>
+<p>   该类库的特点就是已经帮我们写好了队列的这个类以及其中的成员函数，其中我们主要会用到如下这四个函数：</p>
+<pre><code>   deque.append()        # 右侧进队
+   deque.pop()            # 右侧出队
+   deque.popleft()        # 左侧出队
+   deque.appendleft()    # 左侧进队</code></pre>
+<p>  以上就是Python队列的大致原理及其特有类库，各位看官有何不懂之处，欢迎在评论区留言。</p>
 
       
     </div>
@@ -430,7 +409,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/" title="快速排序" target="_blank" rel="external">https://runze-li.github.io/2020/10/02/Quick-Sort-Partition/</a>
+      <a href="https://runze-li.github.io/2020/10/06/queue/" title="Python 队列" target="_blank" rel="external">https://runze-li.github.io/2020/10/06/queue/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -477,12 +456,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/10/03/heap-sort/" title="堆排序"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2020/10/06/maze-problem/" title="迷宫问题--浅谈深度优先搜索"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/10/02/Binary-Search/" title="二分搜索"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/10/05/low-sort/" title="三种基本排序"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
