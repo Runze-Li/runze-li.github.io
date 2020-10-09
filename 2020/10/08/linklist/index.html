@@ -17,27 +17,29 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>迷宫问题--浅谈深度优先搜索 | LiRunze&#39;s Blog</title>
-  <meta name="description" content="在数据结构中，我们先学习的是栈和队列，在本文中，我们来简单聊一聊栈。栈（stack）又名堆栈，它是一种运算受限的线性表。限定仅在表尾进行插入和删除操作的线性表。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。****由上">
+  <title>Python 链表 | LiRunze&#39;s Blog</title>
+  <meta name="description" content="在本文中我们来简单聊一聊Python的链表。首先我们要先了解一下什么是链表，它于数组（列表）有什么区别。链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。 相比于线性表顺序结构，操作复杂">
 <meta property="og:type" content="article">
-<meta property="og:title" content="迷宫问题--浅谈深度优先搜索">
-<meta property="og:url" content="https://runze-li.github.io/2020/10/06/maze-problem/index.html">
+<meta property="og:title" content="Python 链表">
+<meta property="og:url" content="https://runze-li.github.io/2020/10/08/linklist/index.html">
 <meta property="og:site_name" content="RunzeLi&#39;s Blog">
-<meta property="og:description" content="在数据结构中，我们先学习的是栈和队列，在本文中，我们来简单聊一聊栈。栈（stack）又名堆栈，它是一种运算受限的线性表。限定仅在表尾进行插入和删除操作的线性表。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。****由上">
+<meta property="og:description" content="在本文中我们来简单聊一聊Python的链表。首先我们要先了解一下什么是链表，它于数组（列表）有什么区别。链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。 相比于线性表顺序结构，操作复杂">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/06/maze-problem/1.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/06/maze-problem/2.jpg">
-<meta property="og:image" content="https://runze-li.github.io/2020/10/06/maze-problem/3.jpg">
-<meta property="article:published_time" content="2020-10-06T13:30:07.000Z">
-<meta property="article:modified_time" content="2020-10-07T07:04:40.029Z">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/08/linklist/1.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/08/linklist/2.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/08/linklist/3.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/08/linklist/4.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/08/linklist/5.jpg">
+<meta property="og:image" content="https://runze-li.github.io/2020/10/08/linklist/6.jpg">
+<meta property="article:published_time" content="2020-10-08T07:30:07.000Z">
+<meta property="article:modified_time" content="2020-10-09T07:16:49.145Z">
 <meta property="article:author" content="RunzeLi">
 <meta property="article:tag" content="Python">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="搜索">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://runze-li.github.io/2020/10/06/maze-problem/1.jpg">
+<meta name="twitter:image" content="https://runze-li.github.io/2020/10/08/linklist/1.jpg">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://runze-li.github.io/2020/10/06/maze-problem/index.html">
+  <link rel="canonical" href="https://runze-li.github.io/2020/10/08/linklist/index.html">
   
     <link rel="alternate" href="/atom.xml" title="RunzeLi&#39;s Blog" type="application/atom+xml">
   
@@ -320,14 +322,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="post-maze-problem" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-linklist" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      迷宫问题--浅谈深度优先搜索
+      Python 链表
     </h1>
   
 
@@ -335,74 +337,69 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/10/06/maze-problem/" class="article-date">
-	  <time datetime="2020-10-06T13:30:07.000Z" itemprop="datePublished">2020-10-06</time>
+	<a href="/2020/10/08/linklist/" class="article-date">
+	  <time datetime="2020-10-08T07:30:07.000Z" itemprop="datePublished">2020-10-08</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E6%90%9C%E7%B4%A2/">搜索</a>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a>, <a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>, <a class="article-tag-link-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a>
   </span>
 
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/06/maze-problem/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/10/08/linklist/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>在数据结构中，我们先学习的是栈和队列，在本文中，我们来简单聊一聊栈。栈（stack）又名堆栈，它是一种运算受限的线性表。限定仅在表尾进行插入和删除操作的线性表。这一端被称为栈顶，相对地，把另一端称为栈底。向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素；从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素。<br>**<img src="/2020/10/06/maze-problem/1.jpg" class title="图1">**<br>由上图我们可以看出，栈的底部是封死的，因此栈的特点就是先进后出，后进先出。<br>现在我们来看一道迷宫问题,现在想从上边的红块走到下面的红块，期间，我们需要避开所有的蓝块，且只可以选择 上、下、左、右四个方向来移动，最终请输出每次移动的坐标，若不存在这条道路，就输出没有该路径。<br>**<img src="/2020/10/06/maze-problem/2.jpg" class title="图2">**<br>可见上图，为本次的迷宫示意图，为方便大家代码实现，现给出该迷宫的数字表达形式：</p>
-<pre><code>maze = [  
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  
-  [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],  
-  [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],  
-  [1, 0, 0, 0, 0, 1, 1, 0, 0, 1],  
-  [1, 0, 1, 1, 1, 0, 0, 0, 0, 1],  
-  [1, 0, 0, 0, 1, 0, 1, 0, 0, 1],  
-  [1, 0, 1, 0, 0, 0, 1, 0, 0, 1],  
-  [1, 0, 1, 1, 1, 0, 1, 1, 0, 1],  
-  [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],  
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],  
-]</code></pre>
-<p>其中，1 代表不可走的蓝块，0 为可走的白块，（1，1）为起始点，（8，8）为终止点。<br>那么这道题该如何解决呢？<br>首先给大家引入一下深度优先搜索的思想：深度优先搜索属于图算法的一种，是一个针对图和树的遍历算法，英文缩写为DFS即Depth First Search。那么以本题为例，先为大家模拟一下深度优先搜索的过程，以帮助以后更好的理解深度优先搜索。我们首先为这个迷宫设定好坐标：<br>**<img src="/2020/10/06/maze-problem/3.jpg" class title="图3">**<br>由上图，我们已经坐标化整个迷宫，现在已知我们只有上、下、左、右这四种移动方式，假定我们按照上下左右的顺序选择了一种方式且可以移动（即下一个块不是蓝块）就不执行其他移动方式（即如果发现上可走，就不要考虑其他移动方式了，上不行就换右）。同时，走过的块我们要将其标记为蓝块，或是其他颜色的块，以区分未走过的白块。现在请根据我以下所写的坐标来看每一步所走的路径：<br>（1，1）-&gt;（2，1）-&gt;（2，2）-&gt;（2，3）-&gt;（3，3）-&gt;（4，3）-&gt;（4，2）-&gt;（4，1）-&gt;（5，1）<br>-&gt;（6，1）-&gt;（6，2）-&gt;（5，2）-&gt;（4，2）。<br>注意，在这个时候我们会发现（4，2）这个点我们之前走过了，那么这个时候，这个点我们就不能再走了，也说明了，这条路径就是不通的，那么怎么办，我们返回上一个点（6，2），去观察他还有没有路能走，只要下一步不是白块，就可以走，因此，我们以此类推，最终退到（2，3）这个点继续模拟：<br>（2，3）-&gt;（1，3）-&gt;（1，2）发现五路可走，那么回退至（1，3）发现可向下走，于是（1，4）-&gt;（1，5）以此类推，直到最终观察能否到达（8，8）。<br>这既是整个过程的一个思路，也是深搜的基本思想，大家可以从整个过程中看出，是不是这个方式运用的是栈的原理，我们永远取的是栈的栈顶元素进行查找，可以就留在栈内，不可以就出栈，查看新一个栈顶元素，下面我们来代码实现一下：<br>首先我们先定义四个移动方式，这里可以使用lambda表达式： </p>
-<pre><code>dircs = [  
- lambda x, y: (x + 1, y),  
- lambda x, y: (x - 1, y),  
- lambda x, y: (x, y + 1),  
- lambda x, y: (x, y - 1),  
-]</code></pre>
-<p>接下来就是搜索的过程：</p>
-<pre><code>def maze_path(x1, y1, x2, y2):  
-    stack = []  
-    stack.append((x1, y1))   # 列表中传入的是坐标
-    while (len(stack) &gt; 0):  # 只要栈不为空
-        topnode = stack[-1]  # 当前的栈顶元素  
-        if topnode[0] == x2 and topnode[1] == y2:  # 当检测到该点就是终点时输出栈内所有元组
-            for i in stack:  
-                print(i)  
-            return True  
-        for dir in dircs:    # 从四种方向中选取走向  
-            nextnode = dir(topnode[0], topnode[1])   # 查找下一个点的坐标
-            if maze[nextnode[0]][nextnode[1]] == 0:  # 如果该点是白块
-                stack.append(nextnode)               # 这个点入栈
-                maze[nextnode[0]][nextnode[1]] = 2   # 将该点赋值为2 证明该点已经走过  
-            break  
-        else:  
-            stack.pop()                               # 如果没有下一个点，则进行出栈操作
-
-    else:  
-        print(&quot;There is no way!&quot;)                    #栈空则证明没有路
-        return False</code></pre>
-<p>这就是一个简单的深搜过程，其实在这个过程中我们只需要注意，走过的点一定要进行标记即可。</p>
+        <p>在本文中我们来简单聊一聊Python的链表。<br>首先我们要先了解一下什么是链表，它于数组（列表）有什么区别。链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的。链表由一系列结点（链表中每一个元素称为结点）组成，结点可以在运行时动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。 相比于线性表顺序结构，操作复杂。由于不必须按顺序存储，链表在插入的时候可以达到O(1)的复杂度，比另一种线性表顺序表快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而线性表和顺序表相应的时间复杂度分别是O(logn)和O(1)。<br>使用链表结构可以克服数组链表需要预先知道数据大小的缺点，链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。但是链表失去了数组随机读取的优点，同时链表由于增加了结点的指针域，空间开销比较大。链表最明显的好处就是，常规数组排列关联项目的方式可能不同于这些数据项目在记忆体或磁盘上顺序，数据的存取往往要在不同的排列顺序中转换。链表允许插入和移除表上任意位置上的节点，但是不允许随机存取。链表有很多种不同的类型：单向链表，双向链表以及循环链表。<br>首先说一说单链表：<br>**<img src="/2020/10/08/linklist/1.jpg" class title="图1">**<br>上图是一个单链表，那么在Python中我们应该如何实现这个单链表呢？在数据的插入过程中，我们有两种插入方式，头插法和尾插法，顾名思义，就是在头部插入元素和尾部插入元素。<br>头插法的特点就是，把新元素的next指向头节点，再把头节点赋值为新元素：</p>
+<pre><code>class Node:  
+    def __init__(self, item):  
+        self.item = item  
+        self.next = None  
+def creat_linklist_head(li):  # 头插法  
+    head = Node(li[0])  
+    for element in li[1:]:  
+        node = Node(element)  
+        node.next = head  
+        head = node  
+    return head</code></pre>
+<p>尾插法则不同，当只有一个元素时，head指针和tail指针同时指第一个元素。当新元素插入时，将尾指针指向该元素，再将尾指针赋值为新元素值。</p>
+<pre><code>def creat_linklist_tail(li):  # 尾插法  
+    head = Node(li[0])  
+    tail = head  
+    for element in li[1:]:  
+        node = Node(element)  
+        tail.next = node  
+        tail = node  
+    return head</code></pre>
+<p>来看一看单链表的插入和删除。<br>**<img src="/2020/10/08/linklist/2.jpg" class title="图2">**<br>我们假设p是待办元素，它的上一个元素是curnode。在插入时我们要注意，先执行  p.next = curnode.next，以图为例，有的看官回想，为什么不先把p和a连上，因为我们会发现，在连接p和a的时候，a于c断开，没有人和c相连，那么c就会无法被寻找，换句话说，这个元素就游荡在茫茫数据之中。因此，再已知只有curnode和p的前提下，要先连接x和后面的元素，然后再执行 curnode.next = p。<br>**<img src="/2020/10/08/linklist/3.jpg" class title="图3">**<br>那么在删除时呢，我们可以仿照插入时，将p后的元素连接到curnode后面，然后删除p即可。那么我们总结一下单链表插入删除方式如下：</p>
+<pre><code> # 插入元素
+ p.next = curnode.next
+ curnode.next = p
+ # 删除元素
+ curnode.next = p.next
+ del p</code></pre>
+<p>再来看一看双链表，从单链表我们可以看到一个弊端，那就是我们无法向前寻找元素，那么双链表就很好的解决了这一问题。<br>**<img src="/2020/10/08/linklist/4.jpg" class title="图4">**<br>如上图所示，双链表还有个头指针指向上一元素，那么双链表的插入和删除又该如何实现呢？<br>首先是插入元素：<br>**<img src="/2020/10/08/linklist/5.jpg" class title="图5">**<br>由上图，当一个新元素p到来时，我们需要执行这四个操作</p>
+<pre><code>p.next = curnode.next
+curnode.next.prev = p
+p.prev = curnode
+curnode.next = p</code></pre>
+<p>然后是删除元素：<br>**<img src="/2020/10/08/linklist/6.jpg" class title="图6">**<br>由上图，当我们想删除元素p时，我们需执行如下操作：</p>
+<pre><code>curnode.next = p.next
+p.next.prev = curnode
+del p</code></pre>
+<p>这就是数据结构—-链表的大致原理，各位看官有什么不懂的欢迎在评论区留言。</p>
 
       
     </div>
@@ -412,7 +409,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://runze-li.github.io/2020/10/06/maze-problem/" title="迷宫问题--浅谈深度优先搜索" target="_blank" rel="external">https://runze-li.github.io/2020/10/06/maze-problem/</a>
+      <a href="https://runze-li.github.io/2020/10/08/linklist/" title="Python 链表" target="_blank" rel="external">https://runze-li.github.io/2020/10/08/linklist/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -458,13 +455,9 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2020/10/07/maze-problem-queue/" title="迷宫问题2--浅谈广度优先搜索"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2020/10/06/queue/" title="Python 队列"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/10/07/maze-problem-queue/" title="迷宫问题2--浅谈广度优先搜索"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
