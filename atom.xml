@@ -125,37 +125,6 @@
   </entry>
   
   <entry>
-    <title>三种基本排序</title>
-    <link href="https://runze-li.github.io/2020/10/05/low-sort/"/>
-    <id>https://runze-li.github.io/2020/10/05/low-sort/</id>
-    <published>2020-10-05T13:33:00.000Z</published>
-    <updated>2020-10-05T13:37:12.365Z</updated>
-    
-    <content type="html"><![CDATA[<p>以下是三种基础排序的Python实现代码：<br>冒泡排序：</p><pre><code>def bubble_sort(li):   #冒泡排序    for i in range(len(li)-1):          for j in range(len(li)-i-1):              if li[j] &gt; li[j+1]:                  li[j],li[j+1] = li[j+1],li[j]</code></pre><p>选择排序：</p><pre><code>def select_sort(li):    #选择排序    for i in range(len(li)-1):          min_loc = i          for j in range (i+1,len(li)):              if li[j] &lt; li[min_loc]:                  min_loc = j          li[i],li[min_loc] = li[min_loc],li[i]</code></pre><p>插入排序：</p><pre><code>def insert_sort(li):   #插入排序    for i in range(1,len(li)):          tmp = li[i]          j = i - 1          while j &gt;= 0 and li[j] &gt; tmp:              li[j+1] = li[j]              j = j - 1          li[j+1] = tmp</code></pre>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;以下是三种基础排序的Python实现代码：&lt;br&gt;冒泡排序：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def bubble_sort(li):   #冒泡排序  
-  for i in range(len(li)-1):  
-        for j in range(len(li</summary>
-      
-    
-    
-    
-    <category term="排序" scheme="https://runze-li.github.io/categories/%E6%8E%92%E5%BA%8F/"/>
-    
-    
-    <category term="Python" scheme="https://runze-li.github.io/tags/Python/"/>
-    
-    <category term="算法" scheme="https://runze-li.github.io/tags/%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="排序" scheme="https://runze-li.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>归并排序</title>
     <link href="https://runze-li.github.io/2020/10/04/merge-sort/"/>
     <id>https://runze-li.github.io/2020/10/04/merge-sort/</id>
@@ -265,6 +234,38 @@
     <category term="算法" scheme="https://runze-li.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
     <category term="搜索" scheme="https://runze-li.github.io/tags/%E6%90%9C%E7%B4%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 三种基本排序代码</title>
+    <link href="https://runze-li.github.io/2020/10/01/three-low-sort/"/>
+    <id>https://runze-li.github.io/2020/10/01/three-low-sort/</id>
+    <published>2020-10-01T08:47:23.000Z</published>
+    <updated>2020-10-09T07:28:15.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>冒泡排序：</p><pre><code>def bubble_sort(li):   #冒泡排序    for i in range(len(li)-1):          for j in range(len(li)-i-1):              if li[j] &gt; li[j+1]:                  li[j],li[j+1] = li[j+1],li[j]</code></pre><p>选择排序：</p><pre><code>def select_sort(li):    #选择排序    for i in range(len(li)-1):          min_loc = i          for j in range (i+1,len(li)):              if li[j] &lt; li[min_loc]:                  min_loc = j          li[i],li[min_loc] = li[min_loc],li[i]</code></pre><p>插入排序：</p><pre><code>def insert_sort(li):   #插入排序    for i in range(1,len(li)):          tmp = li[i]          j = i - 1          while j &gt;= 0 and li[j] &gt; tmp:              li[j+1] = li[j]              j = j - 1          li[j+1] = tmp</code></pre>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;冒泡排序：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def bubble_sort(li):   #冒泡排序  
+  for i in range(len(li)-1):  
+        for j in range(len(li)-i-1):  
+            if </summary>
+      
+    
+    
+    
+    <category term="排序" scheme="https://runze-li.github.io/categories/%E6%8E%92%E5%BA%8F/"/>
+    
+    
+    <category term="Python" scheme="https://runze-li.github.io/tags/Python/"/>
+    
+    <category term="算法" scheme="https://runze-li.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="排序" scheme="https://runze-li.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
