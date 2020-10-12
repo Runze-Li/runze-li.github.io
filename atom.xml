@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>RunzeLi&#39;s Blog</title>
   
-  
+  <subtitle>Runze_Li</subtitle>
   <link href="https://runze-li.github.io/atom.xml" rel="self"/>
   
   <link href="https://runze-li.github.io/"/>
@@ -10,7 +10,7 @@
   <id>https://runze-li.github.io/</id>
   
   <author>
-    <name>RunzeLi</name>
+    <name>Runze_Li</name>
     
   </author>
   
