@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="归并排序, Python,Java,C++,算法,TensorFlow,人工智能">
+    <meta name="keywords" content="贪心算法, Python,Java,C++,算法,TensorFlow,人工智能">
     <meta name="description" content="一个集百家所长的优质Blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>归并排序 | RunzeLi&#39;s Blog</title>
+    <title>贪心算法 | RunzeLi&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -187,7 +187,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">归并排序</h1>
+                    <h1 class="description center-align post-title">贪心算法</h1>
                 </div>
             </div>
         </div>
@@ -217,10 +217,6 @@
                                 <span class="chip bg-color">算法</span>
                             </a>
                         
-                            <a href="/tags/%E6%8E%92%E5%BA%8F/">
-                                <span class="chip bg-color">排序</span>
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -229,8 +225,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%8E%92%E5%BA%8F/" class="post-category">
-                                排序
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                算法
                             </a>
                         
                     </div>
@@ -242,7 +238,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-04
+                    2020-10-13
                 </div>
                 
 
@@ -258,41 +254,65 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>这次要和大家聊一聊归并排序，那么什么是归并排序呢，首先给大家举一个简单的例子：<br>**<img src="/2020/10/04/merge-sort/1.jpg" class title="图1">**<br>如上图，我们得到一个列表，其实这个列表有一个规律，那就是如果我们从中间截断，左右两边的小列表其实是有序的，在学习数据结构时，我们学习过一个经典例题，合并两个有序数组，那么这个时候是不是可以像合并数组那样合并这两个有序数列。<br>**<img src="/2020/10/04/merge-sort/2.jpg" class title="图2">**<br>如上图，我们把这个列表分为两段，标记好起始元素位置（low）和终止元素位置（high）以及两地址的中间地址（mid），其实，我们已经把整个列表以mid为中心，分成两个小列表了，这个时候就可以利用归并（merge）的思想，首先我们取到两个指针，i，j，这两个指针分别指向两个小列表的第一个元素，这个时候，我们比较i位置的元素大小和j位置的元素大小，我们假设这个列表为lis,那么lis[i] &lt; lis[j]的话，是不是就可以断定，lis[i]此时的元素就是最小的元素了，反之，要是lis[j] &lt; lis[i]，那么lis[j]就是整个列表中最小的元素，这个时候我们就可以把这个最小的元素取出放于一个新列表的首位，我们假设这个新列表是ltmp，这个时候，按照我们的例子，1 就被取下放置于我们的新列表中了，同时，j指针的位置要向后移动一位。<br>**<img src="/2020/10/04/merge-sort/3.jpg" class title="图3">**<br>以此类推，比较i位置与j位置的大小关系，然后把每一次的最小值暂存到新列表（ltmp）中，不要忘记指针随着原位置数的取出而后移。<br>**<img src="/2020/10/04/merge-sort/4.jpg" class title="图4">**<br>那么什么时候终止呢？有两种情况，第一种是 i 指针大于mid位置的时候，第二种是 j 指针大于high位置的时候。终止后会也会发现两种情况，要么是左边的小列表数字有剩余，要么是右边的小列表数字有剩余，这个时候，我们知道，左右两边的列表其实是有序的，那么本身不需要再进行排列了，直接放到新列表（ltmp）的末尾就好，最后，我们只要把新列表（ltmp）再归还给原列表（lis）就完成了一次归并（merge）。代码如下：</p>
-<pre><code>def merge(lis,low,mid,high):  
-    i = low  
-    j = mid + 1  
-    ltmp = []  
-    while i &lt;= mid and j &lt;= high:  
-        if lis[i] &lt; lis[j]:  
-            ltmp.append(lis[i])  
-            i = i + 1  
-        if lis[j] &lt; lis[i]:  
-            ltmp.append(lis[j])  
-            j = j + 1  
-    while i &lt;= mid:  
-        ltmp.append(lis[i])  
-        i = i + 1  
-    while j &lt;= high:  
-        ltmp.append(lis[j])  
-        j = j + 1  
-    lis[low:high+1] = ltmp</code></pre>
-<p>接下来就是整个归并排序的核心了，在实际排序过程中，我们几乎很少能遇到上文这种理想的情况，我们得到的列表大多是无序的。那么，如何能通过归并的方式得到排序的结果呢？<br>**<img src="/2020/10/04/merge-sort/5.jpg" class title="图5">**<br>答案是采取一种递归的思想，先分解再合并，我们将原列表分解为一个个的小列表，每个小列表之间进行归并（merge），然后最终小列表合并成大列表，如下图所示，即可得到一个有序列表。<br>归并排序代码如下：</p>
-<pre><code>def merge_sort(lis,low,high):  
-    if low &lt; high:  
-        mid = (low + high) // 2  
-        merge_sort(lis,low,mid)  
-        merge_sort(lis,mid+1,high)  
-        merge(lis,low,mid,high)  
-    return lis</code></pre>
-<p>是不是看起来很简单，但是理解起来有些难度，这里采用递归的思想，假如，代码的倒数第二行我们不进行归并，而是对此时的递归进行打印：</p>
-<pre><code>def merge_sort_view(lis,low,high):  
-    if low &lt; high:  
-        mid = (low + high) // 2  
-        merge_sort_view(lis,low,mid)  
-        merge_sort_view(lis,mid+1,high)  
-        print(lis[low:high+1])</code></pre>
-<p>那么我们会得到如下的结果：<br>[11, 8]<br>[3, 9]<br>[11, 8, 3, 9]<br>[7, 1]<br>[2, 5]<br>[7, 1, 2, 5]<br>[11, 8, 3, 9, 7, 1, 2, 5]<br>可以看出，我们在递归过程中，只有当low和high均为 1 时会结束递归，然后当加上归并（merge）函数后，即可进行合并。<br>归并排序的时间复杂度无论什么情况都是O (nlogn)，归并排序是Python内置sort函数的底层之一，内置函数是基于归并排序和插入排序的优化算法，因此，学习Python，了解归并排序是必不可少的。</p>
+                <p>本文我们来聊一聊贪心算法，首先我们先了解一下，什么是贪心算法。<br>贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，算法得到的是在某种意义上的局部最优解。贪心算法是一种对某些求最优解问题的更简单、更迅速的设计技术。贪心算法的特点是一步一步地进行，常以当前情况为基础根据某个优化测度作最优选择，而不考虑各种可能的整体情况，省去了为找最优解要穷尽所有可能而必须耗费的大量时间。贪心算法采用自顶向下，以迭代的方法做出相继的贪心选择，每做一次贪心选择，就将所求问题简化为一个规模更小的子问题，通过每一步贪心选择，可得到问题的一个最优解。虽然每一步上都要保证能获得局部最优解，但由此产生的全局解有时不一定是最优的，所以贪心算法不要回溯。<br>贪心算法一般按如下步骤进行：</p>
+<ol>
+<li>建立数学模型来描述问题。</li>
+<li>把求解的问题分成若干个子问题。</li>
+<li>对每个子问题求解，得到子问题的局部最优解。</li>
+<li>把子问题的解局部最优解合成原来解问题的一个解。 </li>
+</ol>
+<p>下面我们通过一些例子来实践一下：<br>第一题：找零问题<br>假设付款找零有100、50、20、10、5、1元面值零钱，问请设计一种方案使得找的钞票数最少。<br>这个问题就是最简单的贪心问题，我们只需要从最大的开始找就好，先从100的开始，然后用50的，以此类推，那么最终钞票总数就是最少的，代码实现如下：</p>
+<pre><code># 找零问题
+t = [100, 50, 20, 10, 5, 1]   
+def change(t, n):  
+    m = [0 for _ in range(len(t))]  
+    for i, money in enumerate(t):  
+        m[i] = n // money  
+        n = n % money  
+    return m, n</code></pre>
+<p>第二题：背包问题<br>背包问题可分为两类，一种是0-1背包，一种是分数背包。0-1背包是指，在取物品时我们必须要么一次性全部拿走该商品，要么不拿。分数背包是指，我们可以选择只拿取某件商品的一部分。首先我们来看一下分数背包，假设我们有一个小背包，可装50g东西，那么这个时候在面前摆好了三种砂，分别是金砂，银砂和铜砂，金砂值60块，共计10g，银砂值100块，共计20g，铜砂值120块，共计30g，问能带走的最大价值是多少。<br>这个问题就可以利用贪心算法，带走性价比最高的就好了，这个时候我们需要先计算一下每一件物品的性价比，那么可以看出金子6块/g，银子5块/g，铜4块/g，那么我们只需要从金子开始，最大程度的带，若背包剩余则带银子，最后铜，代码实现如下：</p>
+<pre><code>goods = [(60, 10), (100, 20), (120, 30)]  # 价格+重量  
+goods.sort(key=lambda x: x[0] / x[1], reverse=True)  # 对性价比进行排序
+def fractional_backpack(goods, w):  
+    m = [0 for _ in range(len(goods))]  
+    for i, (prize, weight) in enumerate(goods):  
+        if w &gt;= weight:  
+            m[i] = 1  
+            w = w - weight  
+        else:  
+            m[i] = w / weight  
+            w = 0  
+  break  
+ return m  
+
+print(fractional_backpack(goods, 50))</code></pre>
+<p>那么我们想一下，0-1 背包是否也能按照这个方法实现呢？显然是不能的，举一个例子，假设我们背包还是50g，这次是金块银块铜块，假设金块60g值300，银块30g值150，铜块50g值200，按照贪心算法，就会把银块拿走，而实际上，拿铜块才是最优解，那么0-1背包如何解决呢？我们下文再讲。</p>
+<p>第三题：数字拼接问题<br>假设有一堆数字，想要将其拼成有一个数字，且这个数字最大，问该如何实现，假设我们有32, 94, 128, 1286, 6, 71这些数字。拿到这个问题，我们的思路一定是比较首位，是不是因为9最大，所以94要放在最前面。那么我们也要考虑一个问题，比如说128 和 1286，前面都是128，那么应该谁在前谁在后呢？我们先来看一下，这两个数拼接后有两种情况，1281286和1286128，很明显是后者大，那么再举一个例子，828和8286，拼接后的两种情况分别是8288286和8286828，很明显是前者大了，那么这种数据我们无法找到其规律，那么怎么办，我们可以直接通过字符串的方式，进行比较，然后只需要比较每次排列好的字符串进行比较就好，例如说比较a + b 和 b + a一样，我们直接通过结果来比较，那么是不是可以考虑一种冒泡排序的思想呢？我们把哪些排序后小的放在下面，大的放在上面即可。代码很简单，大家可以通过代码看出这个思路：</p>
+<pre><code>lis = [32, 94, 128, 1286, 6, 71]  
+
+def number_join(lis):  
+    lis = list(map(str, lis))  
+    for i in range(len(lis)):  
+        for j in range(i, len(lis)):  
+            if lis[i] + lis[j] &lt; lis[j] + lis[i]:  
+                lis[i], lis[j] = lis[j], lis[i]  
+    return &quot;&quot;.join(lis)  
+
+print(number_join(lis))</code></pre>
+<p>问题四：活动选择问题<br>假设有n个活动，但他们共用一个场地且每次只允许其中一个活动，每个活动都有一个开始时间和一个结束时间，问安排哪些活动能使得举办个数最多。<br>**<img src="/2020/10/13/greedy-algorithm/1.jpg" class title="图1">**<br>那么针对这个问题，我们首先要了解一个事情，活动时间结束最早的，一定在最优解中，这个是可以证明的，这里我们使用反正法，假设a是最早结束的活动，b表示最优解中的元素，当a = b时结论成立，反之，假设a不在b中，那么我们以上图为例，假设i2 是最优解中元素，i1不是最优解中元素。可是我们可以观察到如果用i1替换i2是不是也不会影响其他解，那么i1是不是也可以是最优解中的一个，这就矛盾了，因此可以证明，最早结束的一定是最优解。那么知道了这点后，我们是不是就可以把这个最优解放于首位，其他的只需要根据结束时间排好序，然后比较第i个元素是否与我当前结束的这个活动有冲突，冲突则舍弃，不冲突则它是下一个活动，代码如下：</p>
+<pre><code>activities = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9), (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]  
+activities.sort(key=lambda x: x[1])  # 根据结束时间进行排序
+
+def activities_selection(acti):  
+    res = [acti[0]]  
+    for i in range(1, len(acti)):  
+        if acti[i][0] &gt;= res[-1][1]:  # 当前活动开始时间小于等于最后一个入选活动的结束时间  
+           # 不冲突  
+           res.append(a[i])  
+    return res  
+
+print(activities_selection(activities))</code></pre>
+<p>以上就是贪心的基本思想及部分例题，如果大家有哪些不会的可以联系我。</p>
 
             </div>
             <hr/>
@@ -318,7 +338,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://runze-li.github.io/2020/10/04/merge-sort/">https://runze-li.github.io/2020/10/04/merge-sort/</a>
+                    <a href="https://runze-li.github.io/2020/10/13/greedy-algorithm/">https://runze-li.github.io/2020/10/13/greedy-algorithm/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -362,10 +382,6 @@
                             
                                 <a href="/tags/%E7%AE%97%E6%B3%95/">
                                     <span class="chip bg-color">算法</span>
-                                </a>
-                            
-                                <a href="/tags/%E6%8E%92%E5%BA%8F/">
-                                    <span class="chip bg-color">排序</span>
                                 </a>
                             
                         </div>
@@ -533,17 +549,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/06/queue/">
+                <a href="/2020/10/13/greedy-algorithm/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="Python 队列">
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="贪心算法">
                         
-                        <span class="card-title">Python 队列</span>
+                        <span class="card-title">贪心算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -553,9 +570,63 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-06
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/10/09/Binary-Tree/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="二叉树的遍历">
+                        
+                        <span class="card-title">二叉树的遍历</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -577,63 +648,6 @@
                     
                     <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
                         <span class="chip bg-color">数据结构</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/10/03/heap-sort/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="堆排序">
-                        
-                        <span class="card-title">堆排序</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-03
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8E%92%E5%BA%8F/" class="post-category">
-                                    排序
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
-                    </a>
-                    
-                    <a href="/tags/%E7%AE%97%E6%B3%95/">
-                        <span class="chip bg-color">算法</span>
-                    </a>
-                    
-                    <a href="/tags/%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">排序</span>
                     </a>
                     
                 </div>

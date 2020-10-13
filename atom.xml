@@ -6,7 +6,7 @@
   <link href="https://runze-li.github.io/atom.xml" rel="self"/>
   
   <link href="https://runze-li.github.io/"/>
-  <updated>2020-10-09T13:46:35.788Z</updated>
+  <updated>2020-10-13T13:11:47.876Z</updated>
   <id>https://runze-li.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>贪心算法</title>
+    <link href="https://runze-li.github.io/2020/10/13/greedy-algorithm/"/>
+    <id>https://runze-li.github.io/2020/10/13/greedy-algorithm/</id>
+    <published>2020-10-13T13:30:07.000Z</published>
+    <updated>2020-10-13T13:11:47.876Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文我们来聊一聊贪心算法，首先我们先了解一下，什么是贪心算法。<br>贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，算法得到的是在某种意义上的局部最优解。贪心算法是一种对某些求最优解问题的更简单、更迅速的设计技术。贪心算法的特点是一步一步地进行，常以当前情况为基础根据某个优化测度作最优选择，而不考虑各种可能的整体情况，省去了为找最优解要穷尽所有可能而必须耗费的大量时间。贪心算法采用自顶向下，以迭代的方法做出相继的贪心选择，每做一次贪心选择，就将所求问题简化为一个规模更小的子问题，通过每一步贪心选择，可得到问题的一个最优解。虽然每一步上都要保证能获得局部最优解，但由此产生的全局解有时不一定是最优的，所以贪心算法不要回溯。<br>贪心算法一般按如下步骤进行：</p><ol><li>建立数学模型来描述问题。</li><li>把求解的问题分成若干个子问题。</li><li>对每个子问题求解，得到子问题的局部最优解。</li><li>把子问题的解局部最优解合成原来解问题的一个解。 </li></ol><p>下面我们通过一些例子来实践一下：<br>第一题：找零问题<br>假设付款找零有100、50、20、10、5、1元面值零钱，问请设计一种方案使得找的钞票数最少。<br>这个问题就是最简单的贪心问题，我们只需要从最大的开始找就好，先从100的开始，然后用50的，以此类推，那么最终钞票总数就是最少的，代码实现如下：</p><pre><code># 找零问题t = [100, 50, 20, 10, 5, 1]   def change(t, n):      m = [0 for _ in range(len(t))]      for i, money in enumerate(t):          m[i] = n // money          n = n % money      return m, n</code></pre><p>第二题：背包问题<br>背包问题可分为两类，一种是0-1背包，一种是分数背包。0-1背包是指，在取物品时我们必须要么一次性全部拿走该商品，要么不拿。分数背包是指，我们可以选择只拿取某件商品的一部分。首先我们来看一下分数背包，假设我们有一个小背包，可装50g东西，那么这个时候在面前摆好了三种砂，分别是金砂，银砂和铜砂，金砂值60块，共计10g，银砂值100块，共计20g，铜砂值120块，共计30g，问能带走的最大价值是多少。<br>这个问题就可以利用贪心算法，带走性价比最高的就好了，这个时候我们需要先计算一下每一件物品的性价比，那么可以看出金子6块/g，银子5块/g，铜4块/g，那么我们只需要从金子开始，最大程度的带，若背包剩余则带银子，最后铜，代码实现如下：</p><pre><code>goods = [(60, 10), (100, 20), (120, 30)]  # 价格+重量  goods.sort(key=lambda x: x[0] / x[1], reverse=True)  # 对性价比进行排序def fractional_backpack(goods, w):      m = [0 for _ in range(len(goods))]      for i, (prize, weight) in enumerate(goods):          if w &gt;= weight:              m[i] = 1              w = w - weight          else:              m[i] = w / weight              w = 0    break   return m  print(fractional_backpack(goods, 50))</code></pre><p>那么我们想一下，0-1 背包是否也能按照这个方法实现呢？显然是不能的，举一个例子，假设我们背包还是50g，这次是金块银块铜块，假设金块60g值300，银块30g值150，铜块50g值200，按照贪心算法，就会把银块拿走，而实际上，拿铜块才是最优解，那么0-1背包如何解决呢？我们下文再讲。</p><p>第三题：数字拼接问题<br>假设有一堆数字，想要将其拼成有一个数字，且这个数字最大，问该如何实现，假设我们有32, 94, 128, 1286, 6, 71这些数字。拿到这个问题，我们的思路一定是比较首位，是不是因为9最大，所以94要放在最前面。那么我们也要考虑一个问题，比如说128 和 1286，前面都是128，那么应该谁在前谁在后呢？我们先来看一下，这两个数拼接后有两种情况，1281286和1286128，很明显是后者大，那么再举一个例子，828和8286，拼接后的两种情况分别是8288286和8286828，很明显是前者大了，那么这种数据我们无法找到其规律，那么怎么办，我们可以直接通过字符串的方式，进行比较，然后只需要比较每次排列好的字符串进行比较就好，例如说比较a + b 和 b + a一样，我们直接通过结果来比较，那么是不是可以考虑一种冒泡排序的思想呢？我们把哪些排序后小的放在下面，大的放在上面即可。代码很简单，大家可以通过代码看出这个思路：</p><pre><code>lis = [32, 94, 128, 1286, 6, 71]  def number_join(lis):      lis = list(map(str, lis))      for i in range(len(lis)):          for j in range(i, len(lis)):              if lis[i] + lis[j] &lt; lis[j] + lis[i]:                  lis[i], lis[j] = lis[j], lis[i]      return &quot;&quot;.join(lis)  print(number_join(lis))</code></pre><p>问题四：活动选择问题<br>假设有n个活动，但他们共用一个场地且每次只允许其中一个活动，每个活动都有一个开始时间和一个结束时间，问安排哪些活动能使得举办个数最多。<br>**<img src="/2020/10/13/greedy-algorithm/1.jpg" class title="图1">**<br>那么针对这个问题，我们首先要了解一个事情，活动时间结束最早的，一定在最优解中，这个是可以证明的，这里我们使用反正法，假设a是最早结束的活动，b表示最优解中的元素，当a = b时结论成立，反之，假设a不在b中，那么我们以上图为例，假设i2 是最优解中元素，i1不是最优解中元素。可是我们可以观察到如果用i1替换i2是不是也不会影响其他解，那么i1是不是也可以是最优解中的一个，这就矛盾了，因此可以证明，最早结束的一定是最优解。那么知道了这点后，我们是不是就可以把这个最优解放于首位，其他的只需要根据结束时间排好序，然后比较第i个元素是否与我当前结束的这个活动有冲突，冲突则舍弃，不冲突则它是下一个活动，代码如下：</p><pre><code>activities = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9), (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]  activities.sort(key=lambda x: x[1])  # 根据结束时间进行排序def activities_selection(acti):      res = [acti[0]]      for i in range(1, len(acti)):          if acti[i][0] &gt;= res[-1][1]:  # 当前活动开始时间小于等于最后一个入选活动的结束时间             # 不冲突             res.append(a[i])      return res  print(activities_selection(activities))</code></pre><p>以上就是贪心的基本思想及部分例题，如果大家有哪些不会的可以联系我。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;本文我们来聊一聊贪心算法，首先我们先了解一下，什么是贪心算法。&lt;br&gt;贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，算法得到的是在某种意义上的局部最优解。贪心算法是一种对某些求最优解问题的更简单、更迅速的设计</summary>
+      
+    
+    
+    
+    <category term="算法" scheme="https://runze-li.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="Python" scheme="https://runze-li.github.io/tags/Python/"/>
+    
+    <category term="算法" scheme="https://runze-li.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树的遍历</title>
