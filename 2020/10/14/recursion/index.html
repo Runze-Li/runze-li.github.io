@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="贪心算法, Python,Java,C++,算法,TensorFlow,人工智能">
+    <meta name="keywords" content="浅谈递归, Python,Java,C++,算法,TensorFlow,人工智能">
     <meta name="description" content="一个集百家所长的优质Blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>贪心算法 | RunzeLi&#39;s Blog</title>
+    <title>浅谈递归 | RunzeLi&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -187,7 +187,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">贪心算法</h1>
+                    <h1 class="description center-align post-title">浅谈递归</h1>
                 </div>
             </div>
         </div>
@@ -213,8 +213,8 @@
                                 <span class="chip bg-color">Python</span>
                             </a>
                         
-                            <a href="/tags/%E7%AE%97%E6%B3%95/">
-                                <span class="chip bg-color">算法</span>
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                <span class="chip bg-color">数据结构</span>
                             </a>
                         
                     </div>
@@ -225,8 +225,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                算法
+                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
+                                数据结构
                             </a>
                         
                     </div>
@@ -238,7 +238,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-13
+                    2020-10-14
                 </div>
                 
 
@@ -254,65 +254,56 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>本文我们来聊一聊贪心算法，首先我们先了解一下，什么是贪心算法。<br>贪心算法（又称贪婪算法）是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，算法得到的是在某种意义上的局部最优解。贪心算法是一种对某些求最优解问题的更简单、更迅速的设计技术。贪心算法的特点是一步一步地进行，常以当前情况为基础根据某个优化测度作最优选择，而不考虑各种可能的整体情况，省去了为找最优解要穷尽所有可能而必须耗费的大量时间。贪心算法采用自顶向下，以迭代的方法做出相继的贪心选择，每做一次贪心选择，就将所求问题简化为一个规模更小的子问题，通过每一步贪心选择，可得到问题的一个最优解。虽然每一步上都要保证能获得局部最优解，但由此产生的全局解有时不一定是最优的，所以贪心算法不要回溯。<br>贪心算法一般按如下步骤进行：</p>
+                <p>本文我们来简单聊一聊递归的问题，首先我们们先了解一下，什么是递归。在数学与计算机科学中，递归是指在函数的定义中使用函数自身的方法。实际上，递归，顾名思义，其包含了两个意思：递 和 归，这正是递归思想的精华所在。那么一个完整的递归应该具备哪些特点或者说是解题步骤呢？我认为应该有两点：</p>
 <ol>
-<li>建立数学模型来描述问题。</li>
-<li>把求解的问题分成若干个子问题。</li>
-<li>对每个子问题求解，得到子问题的局部最优解。</li>
-<li>把子问题的解局部最优解合成原来解问题的一个解。 </li>
+<li>原问题可以生成若干个小问题，且所有问题的解决方式完全相同。</li>
+<li>有一个结束条件。</li>
 </ol>
-<p>下面我们通过一些例子来实践一下：<br>第一题：找零问题<br>假设付款找零有100、50、20、10、5、1元面值零钱，问请设计一种方案使得找的钞票数最少。<br>这个问题就是最简单的贪心问题，我们只需要从最大的开始找就好，先从100的开始，然后用50的，以此类推，那么最终钞票总数就是最少的，代码实现如下：</p>
-<pre><code># 找零问题
-t = [100, 50, 20, 10, 5, 1]   
-def change(t, n):  
-    m = [0 for _ in range(len(t))]  
-    for i, money in enumerate(t):  
-        m[i] = n // money  
-        n = n % money  
-    return m, n</code></pre>
-<p>第二题：背包问题<br>背包问题可分为两类，一种是0-1背包，一种是分数背包。0-1背包是指，在取物品时我们必须要么一次性全部拿走该商品，要么不拿。分数背包是指，我们可以选择只拿取某件商品的一部分。首先我们来看一下分数背包，假设我们有一个小背包，可装50g东西，那么这个时候在面前摆好了三种砂，分别是金砂，银砂和铜砂，金砂值60块，共计10g，银砂值100块，共计20g，铜砂值120块，共计30g，问能带走的最大价值是多少。<br>这个问题就可以利用贪心算法，带走性价比最高的就好了，这个时候我们需要先计算一下每一件物品的性价比，那么可以看出金子6块/g，银子5块/g，铜4块/g，那么我们只需要从金子开始，最大程度的带，若背包剩余则带银子，最后铜，代码实现如下：</p>
-<pre><code>goods = [(60, 10), (100, 20), (120, 30)]  # 价格+重量  
-goods.sort(key=lambda x: x[0] / x[1], reverse=True)  # 对性价比进行排序
-def fractional_backpack(goods, w):  
-    m = [0 for _ in range(len(goods))]  
-    for i, (prize, weight) in enumerate(goods):  
-        if w &gt;= weight:  
-            m[i] = 1  
-            w = w - weight  
+<p>那么，我们来简单的举一些例子：<br>第一题：阶乘问题<br>这是一道递归经典问题，阶乘 n！即n <em>（n-1）</em>（n-2）…… * 2 * 1，唯一特殊的是0 ，国际规定，0 的阶乘是 1。按照我们的递归思路，先观察递归时的解决方式是什么，n！是不是可以看作是n*（n-1）！，那么以此类推，是不是就可以一直推到结束，那么解决方式找到了，我们来寻找结束条件，那么通过我们对数学的了解，一般都是乘到 1 结束，1 的阶乘是 1 ，0 的阶乘也是 1 ，那么代码我们是不是可以这样写：</p>
+<pre><code>def factorial(n):  
+    if n &lt;= 1:          # 当n小于等于1时返回1
+        return 1  
+    else:  
+        return n * factorial(n - 1) # 当n大于1时返回 n*（n-1）!</code></pre>
+<p>那么这就是整个阶乘的代码部分，那么到底底层是如何实现的呢》给大家进行一个模拟。<br>**<img src="/2020/10/14/recursion/1.jpg" class title="图1">**<br>如图一所示，我们以factorial（5）为例，所谓递归，有递，有归。那么在图中我们可以看到，数据先向下进行传递，当触碰到底部的截止条件时，开始回溯（回归），那么从factorial（1）开始，一直返回到我们的结果。<br>那么在这个问题中我们大致了解了递归的基本原理，那么我们来看下一题进行一下巩固。</p>
+<p>第二题：斐波那契数列<br>这也是一道递归的经典问题，还是按照我们的方式，先看解决方式，所谓斐波那契数列，就是后一项等于前两项的和，即f（n） = f（n-1）+ f（n-2），那么接下来我们考虑结束条件，我们知道，一般来讲，我们从第三个数开始算，因为第0个数和第一个数我们无法向下取两个，同时，第0个数和第一个数我们分别取0和1，那么按照这个思路即可找到截止条件为n &lt;= 1。<br>**<img src="/2020/10/14/recursion/2.jpg" class title="图2">**<br>实现代码如下：</p>
+<pre><code>def fabonacci(n):  
+    if n &lt;= 1 :  # 结束条件
+        return n  
+    else:  
+        return fabonacci(n - 1) + fabonacci(n - 2)</code></pre>
+<p>这就是最基本的斐波那契数列的实现方式。那么我们来看一下这个实现过程是不是存在一些弊端。首先我们模拟一下过程，以fabonacci（5）为例：<br>fabonacci（5）= fabonacci（4）+ fabonacci（3）<br>fabonacci（4）= fabonacci（3）+ fabonacci（2）<br>fabonacci（3）= fabonacci（2）+ fabonacci（1）<br>fabonacci（2）= fabonacci（1）+ fabonacci（0）<br>fabonacci（1）= 1<br>fabonacci（0）= 0<br>那么我们可以看到，当我计算fabonacci（5）的时候，我需要知道 fabonacci（4）和fabonacci（3）的值，然后我们计算fabonacci（4）的时候还是需要知道fabonacci（3）的值，也就是说fabonacci（3）的值仅仅在这几次递归中就被运算了两遍，那么fabonacci（2）的值及fabonacci（1）的值都运算了数次，大大降低了效率。那么这个时候，我们可以考虑另一种递归算法，这个时候，我们考虑每次存入的数据均是本位的值带上其运算时n - 1位的值，这样的话我们可以减少运算次数，因为我们每一次的值都会由上一次的值直接进行加减，举一个例子，譬如说当n = 2时，我们就可以记fabonacci（2）的值为（1，1），第一位的1是该位置的值，而后一个的1是n-1位置，也就是1位置的1，那么这个时候，比如说我们想计算 n = 3时的值，是不是就可以 n = 2时的（1，1）进行1 + 1操作得到此时n = 3 位置的值（2，1），以此类推。实现代码如下：</p>
+<pre><code>def good_fabonacci(n):  
+    if n &lt;= 1:  
+        return (n, 0)  
+    else:  
+        (a, b) = good_fabonacci(n - 1)  
+        return (a + b, a)</code></pre>
+<p>这个问题的实现就大大提高效率，将时间复杂度提高到O(n)，那么是不是感觉这个方式有点像迭代的方式，其实原理类似，在这里就不给大家展示迭代的方式了，一层循环，很简单。</p>
+<p>第三题：递归重写二分查找<br>在之前的文章中，我们学习了二分查找，不太理解的读者可以看一下之前的文章，那么我们想一下，是否可以用递归的方式实现呢？其实原理时一样的，只不过是将迭代方法转变成了递归方法，终止条件都是相同的，代码如下，相信大家在熟悉迭代法的二分后一眼就能看懂这个方式：</p>
+<pre><code>def binary_search_recursive(lis, val, left, right):  
+    if left &gt; right:  
+        return False  
+    else:  
+        mid = (left + right) // 2  
+        if val == lis[mid]:  
+            return mid  
         else:  
-            m[i] = w / weight  
-            w = 0  
-  break  
- return m  
-
-print(fractional_backpack(goods, 50))</code></pre>
-<p>那么我们想一下，0-1 背包是否也能按照这个方法实现呢？显然是不能的，举一个例子，假设我们背包还是50g，这次是金块银块铜块，假设金块60g值300，银块30g值150，铜块50g值200，按照贪心算法，就会把银块拿走，而实际上，拿铜块才是最优解，那么0-1背包如何解决呢？我们下文再讲。</p>
-<p>第三题：数字拼接问题<br>假设有一堆数字，想要将其拼成有一个数字，且这个数字最大，问该如何实现，假设我们有32, 94, 128, 1286, 6, 71这些数字。拿到这个问题，我们的思路一定是比较首位，是不是因为9最大，所以94要放在最前面。那么我们也要考虑一个问题，比如说128 和 1286，前面都是128，那么应该谁在前谁在后呢？我们先来看一下，这两个数拼接后有两种情况，1281286和1286128，很明显是后者大，那么再举一个例子，828和8286，拼接后的两种情况分别是8288286和8286828，很明显是前者大了，那么这种数据我们无法找到其规律，那么怎么办，我们可以直接通过字符串的方式，进行比较，然后只需要比较每次排列好的字符串进行比较就好，例如说比较a + b 和 b + a一样，我们直接通过结果来比较，那么是不是可以考虑一种冒泡排序的思想呢？我们把哪些排序后小的放在下面，大的放在上面即可。代码很简单，大家可以通过代码看出这个思路：</p>
-<pre><code>lis = [32, 94, 128, 1286, 6, 71]  
-
-def number_join(lis):  
-    lis = list(map(str, lis))  
-    for i in range(len(lis)):  
-        for j in range(i, len(lis)):  
-            if lis[i] + lis[j] &lt; lis[j] + lis[i]:  
-                lis[i], lis[j] = lis[j], lis[i]  
-    return &quot;&quot;.join(lis)  
-
-print(number_join(lis))</code></pre>
-<p>问题四：活动选择问题<br>假设有n个活动，但他们共用一个场地且每次只允许其中一个活动，每个活动都有一个开始时间和一个结束时间，问安排哪些活动能使得举办个数最多。<br>**<img src="/2020/10/13/greedy-algorithm/1.jpg" class title="图1">**<br>那么针对这个问题，我们首先要了解一个事情，活动时间结束最早的，一定在最优解中，这个是可以证明的，这里我们使用反正法，假设a是最早结束的活动，b表示最优解中的元素，当a = b时结论成立，反之，假设a不在b中，那么我们以上图为例，假设i2 是最优解中元素，i1不是最优解中元素。可是我们可以观察到如果用i1替换i2是不是也不会影响其他解，那么i1是不是也可以是最优解中的一个，这就矛盾了，因此可以证明，最早结束的一定是最优解。那么知道了这点后，我们是不是就可以把这个最优解放于首位，其他的只需要根据结束时间排好序，然后比较第i个元素是否与我当前结束的这个活动有冲突，冲突则舍弃，不冲突则它是下一个活动，代码如下：</p>
-<pre><code>activities = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9), (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]  
-activities.sort(key=lambda x: x[1])  # 根据结束时间进行排序
-
-def activities_selection(acti):  
-    res = [acti[0]]  
-    for i in range(1, len(acti)):  
-        if acti[i][0] &gt;= res[-1][1]:  # 当前活动开始时间小于等于最后一个入选活动的结束时间  
-           # 不冲突  
-           res.append(a[i])  
-    return res  
-
-print(activities_selection(activities))</code></pre>
-<p>以上就是贪心的基本思想及部分例题，如果大家有哪些不会的可以联系我。</p>
+            if val &lt; lis[mid]:  
+                return binary_search_recursive(lis, val, left, mid - 1)  
+            else:  
+                return binary_search_recursive(lis, val, mid + 1, right)</code></pre>
+<p>问题四：全排列问题<br>什么是全排列，譬如说给两个字符 a，b那么全排列为[（a，b），（b，a）]，三个字符a，b，c 排列方式为<br>[（a,b,c），（a,c,b），（b,a,c），（b,c,a），（c,a,b），（c,b,a）]，那么大家是不是就理解了全排列的方式了？<br>那么我们如何实现它，也就是我们的步骤一，寻找解决方式，其实全排列是一个数字之间两两交换的过程，代码如下：</p>
+<pre><code>def allrange(lis, start, end):  
+    if start == end:  
+        for i in lis:  
+            print(i, end=&quot; &quot;)  
+        print()  
+    for m in range(start, end + 1):  
+        lis[m], lis[start] = lis[start], lis[m]  
+        allrange(lis, start + 1, end)  
+        lis[m], lis[start] = lis[start], lis[m]</code></pre>
+<p>给大家模拟一下三个字符的，大家可能就理解了。首先假设我有三个字符a，b，c，放在一个大列表lis中：<br>**<img src="/2020/10/14/recursion/3.jpg" class title="图3">**<br>那么，我们该如何移动呢，首先我们来找一个字符m当作我的交换位置，m从当前start位置开始到end位置截止，假设我们lis[m]先与lis[start]交换，其实a的位置不变，然后我们start + 1进行递归下一位b，m也改变，依旧是当前start位置的b，然后lis[m]与lis[start]交换，其实b也没变，然后再递归下一位，start + 1,我们结束条件是递归到start = end,此时我们可以输出了，那么这个时候输出的是 a，b，c，那么接下来我们进行回溯回溯到b。<br>**<img src="/2020/10/14/recursion/4.jpg" class title="图4">**<br>我们可以看到，m指针向后移动一位到了end位置，这个时候执行lis[m]与lis[start]交换，是不是就将原a，b，c转换为了a，c，b。<br>**<img src="/2020/10/14/recursion/5.jpg" class title="图5">**<br>这就找到了所有a开头的排列方式，在结束之前，要lis[m]与lis[start]再交换，将数据归还成原样。如果大家还不是很懂，欢迎联系我，我为大家模拟一下四个字符的。<br>好了，以上就是递归的基本原理及部分经典习题解读，如果大家有哪里不理解可在评论区留言。</p>
 
             </div>
             <hr/>
@@ -338,7 +329,7 @@ print(activities_selection(activities))</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://runze-li.github.io/2020/10/13/greedy-algorithm/">https://runze-li.github.io/2020/10/13/greedy-algorithm/</a>
+                    <a href="https://runze-li.github.io/2020/10/14/recursion/">https://runze-li.github.io/2020/10/14/recursion/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -380,8 +371,8 @@ print(activities_selection(activities))</code></pre>
                                     <span class="chip bg-color">Python</span>
                                 </a>
                             
-                                <a href="/tags/%E7%AE%97%E6%B3%95/">
-                                    <span class="chip bg-color">算法</span>
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                                    <span class="chip bg-color">数据结构</span>
                                 </a>
                             
                         </div>
@@ -549,9 +540,10 @@ print(activities_selection(activities))</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/10/14/recursion/">
                     <div class="card-image">
@@ -569,9 +561,9 @@ print(activities_selection(activities))</code></pre>
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -584,6 +576,7 @@ print(activities_selection(activities))</code></pre>
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -606,13 +599,13 @@ print(activities_selection(activities))</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/09/Binary-Tree/">
+                <a href="/2020/10/13/greedy-algorithm/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="二叉树的遍历">
+                        <img src="/medias/featureimages/26.jpg" class="responsive-img" alt="贪心算法">
                         
-                        <span class="card-title">二叉树的遍历</span>
+                        <span class="card-title">贪心算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -623,14 +616,14 @@ print(activities_selection(activities))</code></pre>
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-13
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-category">
-                                    数据结构
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
                                 </a>
                             
                             
@@ -644,8 +637,8 @@ print(activities_selection(activities))</code></pre>
                         <span class="chip bg-color">Python</span>
                     </a>
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
+                    <a href="/tags/%E7%AE%97%E6%B3%95/">
+                        <span class="chip bg-color">算法</span>
                     </a>
                     
                 </div>
